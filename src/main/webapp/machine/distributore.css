@@ -1,0 +1,195 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background-color: #69bfdb;
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+}
+
+.machine {
+    background-color: rgb(66, 73, 83);
+    width: 35em;
+    height: 43em;
+    padding: 1.5em;
+    margin: auto;
+    position: relative;
+    display: grid;
+    grid-gap: 1em;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 2fr 1fr;
+    grid-template-areas: "items order" "grab grab";
+}
+
+.selector {
+    width: 21em;
+    height: 28em;
+    left: 21px;
+    top: 20px;
+    position: absolute;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 0.5em;
+}
+
+.picker {
+    width: 3em;
+    height: auto;
+    margin: auto;
+    padding-top: 4em;
+    /*transform: rotate(10deg);*/
+    display: block;
+    color: black;
+    font-weight: bold;
+
+    text-shadow: 2px 0 0 white, -2px 0 0 white, 0 2px 0 white, 0 -2px 0 white, 1px 1px white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white;
+
+}
+
+
+.shelf {
+    background-color: rgb(66, 73, 83);
+    width: 60%;
+    height: 1em;
+    position: absolute;
+    left: 21px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.shelf p {
+    background-color: rgb(66, 73, 83);
+    color: white;
+    font-size: 12px;
+    display: inline;
+    margin: auto;
+}
+
+#one {
+    top: 135px;
+}
+
+#two {
+    top: 288px;
+}
+
+#three {
+    top: 438px;
+}
+
+.items {
+    background-color: rgb(192, 192, 192);
+    grid-area: "items";
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 0.5em;
+}
+
+
+
+.item {
+    margin: auto;
+    display: block;
+    position: relative;
+}
+
+.order {
+    background-color: rgb(100, 108, 119);
+    grid-area: "order";
+    display: grid;
+    grid-template-rows: 2fr 1fr;
+    grid-template-areas: "container" "coins";
+}
+
+.container {
+    width: 85%;
+    margin: auto;
+    margin-top: 1em;
+    grid-area: "container";
+}
+
+.visualize {
+    background-color: rgb(79, 192, 232);
+    width: 100%;
+    height: 2em;
+    /*border-radius: 50px;*/
+
+}
+
+input {
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.buttons {
+    margin: 1em auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 0.1em;
+}
+
+.btn {
+    background-color: rgb(169, 177, 188);
+    height: 2em;
+    font-family: 'Varela Round', sans-serif;
+    font-size: 19px;
+    color: white;
+    cursor: pointer;
+    border: 0.2px solid rgb(138, 146, 156);
+    border-radius: 2px;
+}
+
+.coins {
+    background-color: rgb(66, 73, 83);
+    width: 7em;
+    margin: auto;
+    grid-area: "coins";
+}
+
+.money {
+    background-color: rgb(169, 177, 188);
+    width: 5em;
+    height: 5em;
+    margin: 1em auto;
+}
+
+.circle {
+    background-color: rgb(66, 73, 83);
+    width: 30px;
+    height: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    margin: auto;
+}
+
+.grab {
+    background-color: rgb(100, 108, 119);
+    height: 10em;
+    border-radius: 10px;
+    grid-area: "grab";
+}
+
+.rectangle {
+    background-color: rgb(169, 177, 188);
+    width: 80%;
+    height: 3em;
+    margin: 3em auto;
+    border-radius: 15px;
+}
+
+.image {
+    width: 5em;
+    height: auto;
+}
+
+.tests {
+    display:flex;
+    text-align:start;
+    flex-direction: row;
+}

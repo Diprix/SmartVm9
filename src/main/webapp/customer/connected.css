@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    margin: 20px;
+    background-color: #69bfdb;
+}
+
+
+.container {
+    height: 100%;
+}
+#etichetta {
+    background-color: #333333;
+    color: white;
+    padding: 5px 10px 5px 10px;
+    text-align: center;
+    margin: auto;
+    /*height: 15px;*/
+    border-radius: 20px;
+}
+
+
+
+.sizedbox {
+    height: 20px;
+}
+
+.sizedbox_cento{
+    height: 100px;
+}
+
+.card {
+    height: 70px;
+    width: 100%;
+
+    vertical-align: center;
+    horiz-align: center;
+    text-align: center;
+    font-weight: bold;
+    margin: 12px 12px 12px 12px;
+    padding: 20px 20px 20px 20px;
+    border-radius: 15px;
+
+}
+
+.blue {
+    background-color: #0059a2;
+    color: white;
+    margin: auto;
+}
+
+.white {
+    background-color: whitesmoke;
+    color: #0059a2;
+    font-weight: normal;
+    height: 95px;
+    margin: auto;
+    font-size: 15px;
+}
+
+.row{
+    display: flex;
+    flex-direction: row;
+    flex-flow: row;
+}
+
+.image{
+    height: 55px;
+}
+
+.spacer {
+    height: 170px;
+}
+
+
+/*
+BUTTON
+*/
+
+.button{
+    margin-top: 35px;
+}
+
+.button input:hover{
+    background-color: rgb(255, 148, 47);
+}
+
+.button input{
+    border: none;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    border-radius: 6px;
+    background-color: rgb(255, 148, 47);
+
+}
+
+.input-field{
+    position: relative;
+    height: 50px;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.input-field input{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    padding: 0 35px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    border-bottom: 2px solid #e7a100;
+    border-top: 2px solid transparent;
+}
