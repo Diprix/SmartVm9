@@ -102,6 +102,24 @@
             loadMachine()
         }, 2000);
 
+        function parseCredit(credit) {
+            let amountString = ""+credit;
+
+            if(amountString.includes(".")){
+                if(amountString.split(".")[1].length < 2){
+                    amountString = amountString + "0";
+                }
+            } else {
+                amountString = amountString + ".00"
+            }
+
+
+
+            amountString = amountString.replace(".", ",");
+
+            return amountString;
+        }
+
         function loadMachine(){
             const xhttp = new XMLHttpRequest();
             xhttp.onload = function() {
@@ -112,7 +130,7 @@
 
                 document.getElementById("idMachine").innerHTML = "ID: " + obj.idMachine;
 
-                document.getElementById("credit_display").value = obj.credit + " €";
+                document.getElementById("credit_display").value = parseCredit(obj.credit) + " €";
 
                 if(obj.status == "ready"){
                     document.getElementById("selection_display").value = "READY";
@@ -193,7 +211,7 @@
 
 
             $.post(
-                "../buy",
+                "${pageContext.request.contextPath}/buy",
                 {
                     idMachine: id,
                     selection: input,

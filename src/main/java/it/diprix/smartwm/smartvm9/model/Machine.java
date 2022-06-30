@@ -7,14 +7,16 @@ public class Machine {
     private String type;
     private String status;
     private double credit;
+    private String position;
     private List<MachineProduct> products;
 
     public Machine() {}
 
-    public Machine(int idMachine, String type, String status) {
+    public Machine(int idMachine, String type, String status, String position) {
         this.idMachine = idMachine;
         this.type = type;
         this.status = status;
+        this.position = position;
     }
 
     public Machine(int idMachine, String type, String status, double credit, List<MachineProduct> products) {
@@ -64,4 +66,14 @@ public class Machine {
     public void setProducts(List<MachineProduct> products) {
         this.products = products;
     }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+
 }

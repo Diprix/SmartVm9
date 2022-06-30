@@ -23,7 +23,7 @@
     <%
         for (int i = 0; i < machineListCount; i++) {
             out.print("<p>");
-            out.print(machineList.get(i).getIdMachine());
+            out.print(machineList.get(i).getPosition());
             out.print("</p>");
 
 
@@ -31,3 +31,11 @@
 
     %>
 </ol>
+
+<div class="listItem">
+    <h4>ID</h4>
+    <p>POSIZIONE</p>
+    <p>stato</p>
+    <h5>choose stato</h5>
+    <button>delete</button>
+</div>

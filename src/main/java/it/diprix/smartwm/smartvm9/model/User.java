@@ -88,8 +88,15 @@ public class User {
 
     public String parseCredit() {
         String amountString = ""+this.credit;
+        System.out.println(amountString.split("\\.")[1]);
+        System.out.println(amountString.split("\\.")[1].length());
+        if(amountString.split("\\.")[1].length() < 2){
+            amountString = amountString + "0";
+        }
+
+
         amountString = amountString.replace(".", ",");
-        amountString = amountString + "0";
+
         return amountString;
     }
 }

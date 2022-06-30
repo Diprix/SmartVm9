@@ -29,7 +29,8 @@ public class GetMachineListServlet extends HttpServlet {
                 Machine machine = new Machine(
                         rs.getInt("idmachine"),
                         rs.getString("type"),
-                        rs.getString("status")
+                        rs.getString("status"),
+                        rs.getString("position")
                 );
                 machineList.add(machine);
             }
