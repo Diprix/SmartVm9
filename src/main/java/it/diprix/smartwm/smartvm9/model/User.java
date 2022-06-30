@@ -85,4 +85,11 @@ public class User {
 
         return newCredit;
     }
+
+    public String parseCredit() {
+        String amountString = ""+this.credit;
+        amountString = amountString.replace(".", ",");
+        amountString = amountString + "0";
+        return amountString;
+    }
 }

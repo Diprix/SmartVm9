@@ -16,7 +16,7 @@
     <section class="sec_saldo" onclick="reload()">
 
                 <label for="saldo">Il tuo saldo è pari a</label>
-                <p class="saldo" id="saldo"> ${user.credit}€</</p>
+                <p class="saldo" id="saldo"> ${user.parseCredit()}€</</p>
 
     </section>
 

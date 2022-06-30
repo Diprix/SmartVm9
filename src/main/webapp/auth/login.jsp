@@ -36,36 +36,36 @@
 
             <span class="title">Login</span>
 
-<%--            <form action="${pageContext.request.contextPath}/login" method="post">--%>
+            <%--            <form action="${pageContext.request.contextPath}/login" method="post">--%>
 
-                <div class="input-field">
-                    <input value="gianluca.bianchi@gmail.it" id="email" type="email" placeholder="Enter your email" name="email" required>
-                    <i class="uil uil-envelope icon"></i>
-                </div>
-                <div class="input-field">
-                    <input value="password" type="password" id="psw" class="password" placeholder="Enter your password" name="password" required>
-                    <i class="uil uil-lock icon"></i>
-                    <i class="uil uil-eye-slash showHidePw"></i>
-                </div>
+            <div class="input-field">
+                <input value="luigi.verdi@smartvm.it" id="email" type="email" placeholder="Enter your email" name="email" required>
+                <i class="uil uil-envelope icon"></i>
+            </div>
+            <div class="input-field">
+                <input value="password" type="password" id="psw" class="password" placeholder="Enter your password" name="password" required>
+                <i class="uil uil-lock icon"></i>
+                <i class="uil uil-eye-slash showHidePw"></i>
+            </div>
 
-                <div class="checkbox-text">
-                    <div class="checkbox-content">
-                        <input type="checkbox" id="logCheck" name="remember">
-                        <label for="logCheck" class="text">Remember me</label>
-                    </div>
-
-                    <a href="#" class="text">Forgot password?</a>
+            <div class="checkbox-text">
+                <div class="checkbox-content">
+                    <input type="checkbox" id="logCheck" name="remember">
+                    <label for="logCheck" class="text">Remember me</label>
                 </div>
 
-<%--                <div class="input-field button">--%>
-<%--                    <input type="submit" value="Login Now">--%>
-<%--    <button type="button" class="btn btn-primary" onclick="accedi()">Login Now </button>--%>
-<%--                </div>--%>
+                <a href="#" class="text">Forgot password?</a>
+            </div>
+
+            <%--                <div class="input-field button">--%>
+            <%--                    <input type="submit" value="Login Now">--%>
+            <%--    <button type="button" class="btn btn-primary" onclick="accedi()">Login Now </button>--%>
+            <%--                </div>--%>
 
             <div class="input-field button">
                 <input type="button" value="Login Now" onclick="accedi()">
             </div>
-<%--            </form>--%>
+            <%--            </form>--%>
 
             <div class="login-signup">
                     <span class="text">Not a member?

@@ -1,23 +1,18 @@
 package it.diprix.smartwm.smartvm9.controller;
 
 import it.diprix.smartwm.smartvm9.service.DBHelper;
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
-import java.io.IOException;
 
-
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 @WebServlet(name = "RegisterServlet", value = "/register")
 public class RegisterServlet extends HttpServlet {
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        out.print("Working");
-    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,15 +26,17 @@ public class RegisterServlet extends HttpServlet {
 
         RequestDispatcher dispatcher;
 
+        System.out.println(name);
 
-        if(name != null && email != null && password != null && cpsw != null && password.equals(cpsw) && phone != null){
+        dispatcher = request.getRequestDispatcher("auth/login.jsp");
+
+        if(name != "" && email != "" && password != "" && cpsw != "" && password.equals(cpsw) && phone != ""){
 
             try {
 
 
                 int checkResult = DBHelper.registerUser(name, phone, email, password);
 
-                dispatcher = request.getRequestDispatcher("auth/login.jsp");
 
                 if (checkResult > 0){
                     request.setAttribute("status", "success");
@@ -51,7 +48,9 @@ public class RegisterServlet extends HttpServlet {
 
                 }
 
-                dispatcher.forward(request, response);
+
+
+//                response.sendRedirect("index.jsp");
 
 
             } catch (Exception e) {
@@ -66,7 +65,7 @@ public class RegisterServlet extends HttpServlet {
 
         }
 
-
+        dispatcher.forward(request, response);
 
     }
 }

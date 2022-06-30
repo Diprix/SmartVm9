@@ -7,6 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<div class="tablebox">
 <h3>Macchinetta connessa: ${idMachine}</h3>
 
 <h4>Product List:</h4>
@@ -30,9 +31,9 @@
       out.print("<td>" + result.get(i).getProductID() + "</td>");
       out.print("<td>" + result.get(i).getSelection() + "</td>");
       out.print("<td>" + result.get(i).getDescription() + "</td>");
-      out.print("<td id=\"" + result.get(i).getProductID() + "\">" + result.get(i).getQty() + "</td>");
+      out.print("<td id=\"" + result.get(i).getProductID() + "\">" + result.get(i).getQty() + "</td>"); // contenteditable='true'
       out.print("<td>" +
-              "<button onclick=\"refill("+ request.getParameter("idMachine") +", 10, "+ result.get(i).getProductID() +", '"+ result.get(i).getSelection() +"')\">REFILL</button>"
+              "<button id=\"refill\" onclick=\"refill("+ request.getParameter("idMachine") +", 10, "+ result.get(i).getProductID() +", '"+ result.get(i).getSelection() +"')\">REFILL</button>"
               + "</td>");
       out.print("</tr>");
 
@@ -43,8 +44,9 @@
 
 </table>
 
-<button onclick="closeConnection(${idMachine})">FINE</button>
+<button id="exit" onclick="closeConnection(${idMachine})">FINE</button>
 
+</div>
 
 
 <script>

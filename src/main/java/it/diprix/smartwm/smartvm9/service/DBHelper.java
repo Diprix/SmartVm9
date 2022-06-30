@@ -276,6 +276,17 @@ public class DBHelper {
         return 0;
     }
 
+    public static ResultSet getMachineList(){
+        try(Connection con = conn()){
+            PreparedStatement statement = con.prepareStatement("SELECT * FROM machine WHERE idmachine <> 0");
 
+            return  statement.executeQuery();
+
+        } catch (SQLException | NamingException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 
 }

@@ -3,12 +3,13 @@ package it.diprix.smartwm.smartvm9.controller;
 
 import it.diprix.smartwm.smartvm9.model.User;
 import it.diprix.smartwm.smartvm9.service.DBHelper;
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
-import java.io.IOException;
 
-
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.ResultSet;
 
@@ -59,15 +60,19 @@ public class LoginServlet extends HttpServlet {
                 currentSession.setAttribute("idUser", rs.getInt("idUser"));
                 currentSession.setAttribute("user_type", rs.getString("user_type"));
 
-
+                request.setAttribute("status", "success");
+                request.setAttribute("msg", "Login");
+//                request.getRequestDispatcher("auth/login.jsp").forward(request, response);
 
             } else {
                 request.setAttribute("status", "error");
                 request.setAttribute("msg", "Email o Password errati");
-                request.getRequestDispatcher("auth/login.jsp").forward(request, response);
+//                request.getRequestDispatcher("auth/login.jsp").forward(request, response);
 
             }
 
+
+            request.getRequestDispatcher("auth/login.jsp").forward(request, response);
 
 
         } catch (Exception e) {

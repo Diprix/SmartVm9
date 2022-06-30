@@ -11,6 +11,12 @@ public class Machine {
 
     public Machine() {}
 
+    public Machine(int idMachine, String type, String status) {
+        this.idMachine = idMachine;
+        this.type = type;
+        this.status = status;
+    }
+
     public Machine(int idMachine, String type, String status, double credit, List<MachineProduct> products) {
         this.idMachine = idMachine;
         this.type = type;
