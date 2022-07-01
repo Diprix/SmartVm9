@@ -8,7 +8,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/customer/connected.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/WEB-INF/views/customer/connected.css">
 
     <div class="container" >
 
@@ -20,7 +20,7 @@
         <div class="sizedbox"></div>
 
         <div class="card white row">
-            <img class="image" src="${pageContext.request.contextPath}/assets/images/keypad.png">
+            <img class="image" src="${pageContext.request.contextPath}/WEB-INF/assets/images/keypad.png">
 
             <p>Usa il tastierino del distributore per acquistare</p>
         </div>

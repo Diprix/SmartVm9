@@ -114,7 +114,7 @@
 
            // $("#includedContent").load("${pageContext.request.contextPath}/customer/transaction.jsp");
 
-            $("#main").load("auth/login.jsp");
+            $("#main").load("${pageContext.request.contextPath}/WEB-INF/views/auth/login.jsp");
 
         }
         xhttp.open("GET", "${pageContext.request.contextPath}/logout", false);

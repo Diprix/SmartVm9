@@ -7,7 +7,7 @@
         <packaging>war</packaging>
       </options>
     </properties>
-    <root id="archive" name="SmartVm9-1.0-SNAPSHOT.war">
+    <root id="archive" name="SmartVm9-1.2.war">
       <element id="artifact" artifact-name="SmartVm9:war exploded" />
     </root>
   </artifact>

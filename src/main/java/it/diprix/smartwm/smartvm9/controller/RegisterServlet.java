@@ -28,7 +28,7 @@ public class RegisterServlet extends HttpServlet {
 
         System.out.println(name);
 
-        dispatcher = request.getRequestDispatcher("auth/login.jsp");
+        dispatcher = request.getRequestDispatcher("WEB-INF/views/auth/login.jsp");
 
         if(name != "" && email != "" && password != "" && cpsw != "" && password.equals(cpsw) && phone != ""){
 

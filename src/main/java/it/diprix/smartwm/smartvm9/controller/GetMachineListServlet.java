@@ -36,7 +36,7 @@ public class GetMachineListServlet extends HttpServlet {
             }
 
             request.setAttribute("machineList", machineList);
-            request.getRequestDispatcher("admin/macchinette.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/views/admin/macchinette.jsp").forward(request, response);
 
         } catch (Exception e) {
             e.printStackTrace();

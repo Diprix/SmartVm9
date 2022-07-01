@@ -12,7 +12,7 @@
 
     <title>SmartVM</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/technical/technical.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/WEB-INF/views/technical/technical.css">
 
 
 

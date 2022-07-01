@@ -3,12 +3,12 @@ package it.diprix.smartwm.smartvm9.controller;
 import it.diprix.smartwm.smartvm9.model.MachineProduct;
 import it.diprix.smartwm.smartvm9.model.User;
 import it.diprix.smartwm.smartvm9.service.DBHelper;
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
-import java.io.IOException;
 
-
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
@@ -56,7 +56,7 @@ public class TecnicalConnectionServlet extends HttpServlet {
 
                     request.setAttribute("tecnicalProductList", machineProductLsit);
 
-                    request.getRequestDispatcher("technical/connected.jsp").forward(request, response);
+                    request.getRequestDispatcher("WEB-INF/views/technical/connected.jsp").forward(request, response);
 
                 } else {
                     System.out.println("Errore Connessione");

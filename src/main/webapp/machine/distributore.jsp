@@ -140,6 +140,9 @@
                 } else if(obj.status == "service"){
                     document.getElementById("selection_display").value = "SERVICE";
 
+                } else {
+                    document.getElementById("selection_display").value = "*FUORI SERVIZIO*";
+
                 }
 
                 if(obj.status != "ready" && obj.status != "service"){

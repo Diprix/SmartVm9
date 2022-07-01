@@ -22,7 +22,7 @@
 
 
     <section class="content">
-        <img src="${pageContext.request.contextPath}/assets/images/borsellino.png" style="height: 50px;">
+        <img src="${pageContext.request.contextPath}/WEB-INF/assets/images/borsellino.png" style="height: 50px;">
         <p class="txt">Paga tramite</p>
         <p class="txt_bold">borsellino</p>
         <div class="spacer"></div>
@@ -85,7 +85,7 @@
         xhttp.onload = function() {
 
             if(this.responseText=="disconnected"){
-                $("#main").load("${pageContext.request.contextPath}/customer/mainpage.jsp");
+                $("#main").load("${pageContext.request.contextPath}/WEB-INF/views/customer/mainpage.jsp");
 
             }
 
@@ -99,7 +99,7 @@
 
 
     function reload(){
-        $("#includedContent").load("${pageContext.request.contextPath}/customer/home.jsp");
+        $("#includedContent").load("${pageContext.request.contextPath}/WEB-INF/views/customer/home.jsp");
     }
 
 </script>
