@@ -10,7 +10,7 @@
          pageEncoding="UTF-8"%>
 
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/WEB-INF/views/customer/transaction.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/customer/transaction.css">
 
     <h1>Transazioni</h1>
 <p style="font-size: 10px">(Ultime 4 transazioni)</p>

@@ -20,7 +20,7 @@ public class ConnectMachineServlet extends HttpServlet {
         User user = (User) request.getSession().getAttribute("user");
         out.println(user.getEmail());
 
-        request.getRequestDispatcher("WEB-INF/views/customer/connected.jsp").forward(request, response);
+        request.getRequestDispatcher("customer/connected.jsp").forward(request, response);
 
 
         //Settare machine.status con id cliente
@@ -53,7 +53,7 @@ public class ConnectMachineServlet extends HttpServlet {
 
                     // response.sendRedirect("customer/connected.jsp");
 
-                    request.getRequestDispatcher("WEB-INF/views/customer/connected.jsp").forward(request, response);
+                    request.getRequestDispatcher("WEB-INF/view/connected.jsp").forward(request, response);
 
                 } else {
                     //out.print("Errore Connessione");

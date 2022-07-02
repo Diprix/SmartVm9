@@ -1,0 +1,60 @@
+
+<link rel="stylesheet" href="customer/other.css">
+
+<div class="otherBody">
+<div class="card">
+    <h1>Altro</h1>
+
+
+
+    <div class="container">
+
+        <div class="input-field button">
+            <input type="button" value="Logout" onclick="logout()">
+        </div>
+
+        <div class="input-field button">
+            <input id="execute" type="button" value="Ultime transazioni">
+        </div>
+
+    </div>
+</div>
+
+</div>
+
+
+<script>
+
+    function logout(){
+
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+
+
+
+            $("#main").load("auth/login.jsp");
+
+        }
+        xhttp.open("GET", "logout", false);
+        xhttp.send();
+    }
+
+    $(document).ready(function() {
+        $("#execute").click(function() {
+                $.post("TransactionServlet",
+                    function(data, status) {
+                    if (status == "success")
+                        $("#includedContent").html(data);
+                });
+
+        });
+    });
+</script>
+
+
+
+
+
+
+
+

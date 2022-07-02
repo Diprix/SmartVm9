@@ -140,12 +140,12 @@
                 } else if(obj.status == "service"){
                     document.getElementById("selection_display").value = "SERVICE";
 
-                } else {
+                } else if(obj.status == "off"){
                     document.getElementById("selection_display").value = "*FUORI SERVIZIO*";
 
                 }
 
-                if(obj.status != "ready" && obj.status != "service"){
+                if(obj.status != "ready" && obj.status != "service" && obj.status != "off"){
 
                     //incremento contatore per disconnessione automatica di un utente
                     ++cicleCount
@@ -173,10 +173,8 @@
                     '        </div>';
 
                 for(var i = 0; i < obj.products.length; i++){
-                    // console.log(obj.products[i].description, obj.products[i].qty, obj.products[i].price);
-                    // console.log(obj.products[i].qty > 0);
 
-                    // $("#items").append("<li>" + obj.products[i].description + " : " + obj.products[i].price + "€ </li>");
+
                     $(".items").append('<div class="item"> ' +
 
                         str(obj.products[i]) +
@@ -200,7 +198,7 @@
                 if(product.qty <= 0) {
                     return '<img class="image e'+product.selection+'">';
                 } else {
-                    return '<img class="image e'+product.selection+'" src="../assets/images/'+product.productID+'.png" alt="'+product.selection+'">'
+                    return '<img class="image e'+product.selection+'" src="${pageContext.request.contextPath}/assets/images/'+product.productID+'.png" alt="'+product.selection+'">'
                 }
         }
 

@@ -18,7 +18,7 @@
     <link rel="icon" href="${pageContext.request.contextPath}/WEB-INF/assets/icons/favicon.ico">
 
     <!-- ===== CSS ===== -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/WEB-INF/views/auth/login.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/auth/login.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 
@@ -131,7 +131,7 @@
 </div>
 
 <%--<script src="login.js"></script>--%>
-<script src="${pageContext.request.contextPath}/WEB-INF/views/auth/login.js"></script>
+<script src="${pageContext.request.contextPath}/auth/login.js"></script>
 
 <%--<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>--%>
 <link rel="stylesheet" href="alert/dist/sweetalert.css">

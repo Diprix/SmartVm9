@@ -46,7 +46,7 @@ public class DisconnectMachineServlet extends HttpServlet {
                         PrintWriter out = response.getWriter();
                         out.print("disconnected");
 
-                        //request.getRequestDispatcher("customer/mainpage.jsp").forward(request, response);
+                        //request.getRequestDispatcher("customer/mainpage.html").forward(request, response);
                     } else {
                         System.out.println("Errore disconnessione");
 

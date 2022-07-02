@@ -45,7 +45,7 @@ public class TransactionServlet extends HttpServlet {
            // JSON // request.setAttribute("transactionList", transactionJSONString);
             request.setAttribute("transactionList", transactionList);
 
-            request.getRequestDispatcher("WEB-INF/views/customer/transaction.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/view/transaction.jsp").forward(request, response);
 
 
 //            PrintWriter out = response.getWriter();

@@ -56,7 +56,7 @@ public class TecnicalConnectionServlet extends HttpServlet {
 
                     request.setAttribute("tecnicalProductList", machineProductLsit);
 
-                    request.getRequestDispatcher("WEB-INF/views/technical/connected.jsp").forward(request, response);
+                    request.getRequestDispatcher("technical/connected.jsp").forward(request, response);
 
                 } else {
                     System.out.println("Errore Connessione");
