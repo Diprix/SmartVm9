@@ -4,6 +4,7 @@ package it.diprix.smartwm.smartvm9.controller;
 import it.diprix.smartwm.smartvm9.model.User;
 import it.diprix.smartwm.smartvm9.service.DBHelper;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,6 +27,11 @@ public class LoginServlet extends HttpServlet {
         if(oldSession != null){
             oldSession.invalidate(); //invalida vecchia sessione
         }
+
+        RequestDispatcher dispatcher;
+
+
+
 
         try {
 
@@ -62,17 +68,20 @@ public class LoginServlet extends HttpServlet {
 
                 request.setAttribute("status", "success");
                 request.setAttribute("msg", "Login");
-//                request.getRequestDispatcher("auth/login.jsp").forward(request, response);
+
+                response.sendRedirect("index.jsp");
+
 
             } else {
                 request.setAttribute("status", "error");
                 request.setAttribute("msg", "Email o Password errati");
-//                request.getRequestDispatcher("auth/login.jsp").forward(request, response);
+
+                dispatcher = request.getRequestDispatcher("index.jsp");
+                dispatcher.forward(request, response);
 
             }
 
 
-            request.getRequestDispatcher("auth/login.jsp").forward(request, response);
 
 
         } catch (Exception e) {

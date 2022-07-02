@@ -27,8 +27,10 @@ public class RegisterServlet extends HttpServlet {
         RequestDispatcher dispatcher;
 
         System.out.println(name);
+//        HttpSession session = request.getSession();
 
-        dispatcher = request.getRequestDispatcher("auth/login.jsp");
+
+        dispatcher = request.getRequestDispatcher("index.jsp");
 
         if(name != "" && email != "" && password != "" && cpsw != "" && password.equals(cpsw) && phone != ""){
 
@@ -47,10 +49,6 @@ public class RegisterServlet extends HttpServlet {
                     request.setAttribute("msg", "Registrazione fallita");
 
                 }
-
-
-
-//                response.sendRedirect("index.jsp");
 
 
             } catch (Exception e) {
