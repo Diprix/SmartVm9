@@ -12,7 +12,7 @@
 <body overlay>
 
 
-<div class="container">
+<div class="homeContainer">
     <section class="sec_saldo" onclick="reload()">
 
                 <label for="saldo">Il tuo saldo è pari a</label>
@@ -98,9 +98,6 @@
     }
 
 
-    function reload(){
-        $("#includedContent").load("${pageContext.request.contextPath}/customer/home.jsp");
-    }
 
 </script>
 

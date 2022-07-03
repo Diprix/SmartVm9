@@ -26,18 +26,18 @@ public class RoutingServlet extends HttpServlet {
 
             if(isMobile.equals("true")){
 
-                dispatcher = request.getRequestDispatcher("customer/mainpage.html");
+                dispatcher = request.getRequestDispatcher("/WEB-INF/view/customer/mainpage.jsp");
 
             } else {
                 switch (user_type){
                     case "CUSTOMER":
-                        dispatcher = request.getRequestDispatcher("customer/mainpage.html");
+                        dispatcher = request.getRequestDispatcher("/WEB-INF/view/customer/mainpage.jsp");
                         break;
                     case "TECHNICAL":
-                        dispatcher = request.getRequestDispatcher("technical/mainpage.jsp");
+                        dispatcher = request.getRequestDispatcher("/WEB-INF/view/technical/mainpage.jsp");
                         break;
                     case "ADMIN":
-                        dispatcher = request.getRequestDispatcher("admin/mainpage.jsp");
+                        dispatcher = request.getRequestDispatcher("/WEB-INF/view/admin/mainpage.jsp");
                         break;
 
                 }

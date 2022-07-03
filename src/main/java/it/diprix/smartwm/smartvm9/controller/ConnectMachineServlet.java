@@ -53,7 +53,7 @@ public class ConnectMachineServlet extends HttpServlet {
 
                     // response.sendRedirect("customer/connected.jsp");
 
-                    request.getRequestDispatcher("WEB-INF/view/connected.jsp").forward(request, response);
+                    request.getRequestDispatcher("WEB-INF/view/customer/connected.jsp").forward(request, response);
 
                 } else {
                     //out.print("Errore Connessione");

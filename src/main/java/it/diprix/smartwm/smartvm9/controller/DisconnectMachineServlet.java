@@ -2,14 +2,13 @@ package it.diprix.smartwm.smartvm9.controller;
 
 import it.diprix.smartwm.smartvm9.model.User;
 import it.diprix.smartwm.smartvm9.service.DBHelper;
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
-import java.io.IOException;
 
-
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.ResultSet;
 
 @WebServlet(name = "DisconnectMachineServlet", value = "/disconnect")
@@ -43,10 +42,10 @@ public class DisconnectMachineServlet extends HttpServlet {
                     if(result > 0){
                         System.out.println("Disconnessione eseguita");
 
-                        PrintWriter out = response.getWriter();
-                        out.print("disconnected");
+//                        PrintWriter out = response.getWriter();
+//                        out.print("disconnected");
 
-                        //request.getRequestDispatcher("customer/mainpage.html").forward(request, response);
+                        request.getRequestDispatcher("/WEB-INF/view/customer/mainpage.jsp").forward(request, response);
                     } else {
                         System.out.println("Errore disconnessione");
 

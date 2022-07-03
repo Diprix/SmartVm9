@@ -12,6 +12,7 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/customer/transaction.css">
 
+<div class="transactionBody">
     <h1>Transazioni</h1>
 <p style="font-size: 10px">(Ultime 4 transazioni)</p>
 <div class="sizedbox"></div>
@@ -23,13 +24,14 @@
 <%
     int transactionCount = result.size();
 %>
+
 <div class="scrollable">
-    <div class="container">
+    <div class="transactionContainer">
 
         <%
             for (int i = 0; i < transactionCount; i++) {
                 out.print(
-                        "<div class=\"card row white\"> " +
+                        "<div class=\"transactionCard row white\"> " +
                                 "<section class=\"sx\"> " +
                                 "<h4>");
 
@@ -92,5 +94,7 @@
 --%>
 
     </div>
+
+</div>
 
 </div>

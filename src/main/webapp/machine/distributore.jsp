@@ -185,7 +185,7 @@
                 $(".items").append('<div class="selector"></div>');
 
                 for(var i = 0; i < obj.products.length; i++){
-                    $(".selector").append('<p class="picker p'+obj.products[i].selection+'">€ '+ obj.products[i].price +'</p>');
+                    $(".selector").append('<p class="picker p'+obj.products[i].selection+'">€ '+ parseCredit(obj.products[i].price) +'</p>');
                 }
 
             }

@@ -2,13 +2,14 @@ package it.diprix.smartwm.smartvm9.controller;
 
 import it.diprix.smartwm.smartvm9.model.User;
 import it.diprix.smartwm.smartvm9.service.DBHelper;
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
-import java.io.IOException;
 
-
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -42,12 +43,17 @@ public class CreditServlet extends HttpServlet {
 
             }
 
-            //PrintWriter out = response.getWriter();
+            // request.getRequestDispatcher("WEB-INF/view/customer/mainpage.jsp").forward(request, response);
+
+            PrintWriter out = response.getWriter();
+            out.print(user.parseCredit());
 
             
 
         } catch (Exception e) {
+
             e.printStackTrace();
+
         }
     }
 }
