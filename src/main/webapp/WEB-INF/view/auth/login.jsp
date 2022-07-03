@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/auth/login.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/public/css/login.css">
 
 <input type="hidden" id="status" value="<%= request.getAttribute("status") %>">
 <input type="hidden" id="msg" value="<%= request.getAttribute("msg") %>">

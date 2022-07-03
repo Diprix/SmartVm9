@@ -10,7 +10,7 @@
          pageEncoding="UTF-8"%>
 
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/customer/transaction.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/public/css/transaction.css">
 
 <div class="transactionBody">
     <h1>Transazioni</h1>

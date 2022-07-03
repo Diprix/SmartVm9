@@ -95,12 +95,12 @@ OTHER
 
 function logout(){
 
+    console.log("LOGOUT")
+
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
 
-
-
-        $("#main").load("auth/login.jsp");
+        location.reload();
 
     }
     xhttp.open("GET", "logout", false);

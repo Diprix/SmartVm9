@@ -8,7 +8,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/customer/connected.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/public/css/connected.css">
 
     <div class="container" >
 

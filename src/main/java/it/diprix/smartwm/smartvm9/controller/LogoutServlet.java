@@ -1,5 +1,6 @@
 package it.diprix.smartwm.smartvm9.controller;
 
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -10,13 +11,13 @@ import java.io.IOException;
 @WebServlet(name = "LogoutServlet", value = "/logout")
 public class LogoutServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession();
 
         if(session != null)
             session.invalidate();
 
-        response.sendRedirect("index.jsp");
+        // request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
 }

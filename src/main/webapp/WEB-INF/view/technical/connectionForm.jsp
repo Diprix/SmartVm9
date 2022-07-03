@@ -43,7 +43,8 @@
 
             // $("#includedContent").load("${pageContext.request.contextPath}/customer/transaction.jsp");
 
-            $("#main").load("auth/login.jsp");
+            // $("#main").load("auth/login.jsp");
+
 
         }
         xhttp.open("GET", "${pageContext.request.contextPath}/logout", false);
