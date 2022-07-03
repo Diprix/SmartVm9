@@ -1,24 +1,16 @@
-<!--
+
 <%@ page import="it.diprix.smartwm.smartvm9.model.User" %>
 
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
--->
 
 
-<%--<link rel="stylesheet" href="${pageContext.request.contextPath}/customer/home.css">--%>
-<%--<link rel="stylesheet" href="${pageContext.request.contextPath}/customer/navbar.css">--%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/public/css/customer.css">
 
-<%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>--%>
-<%--<script src="${pageContext.request.contextPath}/public/js/script.js"></script>--%>
-<%--<script src="${pageContext.request.contextPath}/public/js/customer.js"></script>--%>
-<%--<script type="text/javascript" src="<%= request.getContextPath() %>/public/js/script.js"></script>--%>
-<%--<script type="text/javascript" src="<%= request.getContextPath() %>/public/js/customer.js"></script>--%>
 
 
 
-
+<!-- Scharmata Ricarica Conto -->
 <section id="payment" class="hide">
     <div class="paymentBody">
 
@@ -48,12 +40,13 @@
     </div>
 </section>
 
+<!-- Scharmata Home -->
 <section id="home" class="">
     <div class="homeContainer">
         <div class="sec_saldo">
 
-            <label for="saldo">Il tuo saldo è pari a</label>
-            <p class="saldo" id="saldo"> ${user.parseCredit()}€</</p>
+            <label for="saldo">Il tuo saldo e' pari a</label>
+            <p class="saldo" id="saldo"> ${user.parseCredit()} €</</p>
 
         </div>
 
@@ -83,6 +76,7 @@
 
 </section>
 
+<!-- Scharmata Altro -->
 <section id="other" class="hide">
     <div class="otherBody">
         <div class="card">
@@ -106,10 +100,14 @@
     </div>
 </section>
 
+<!-- Scharmata Lista Transazioni -->
 <section id="transaction" class="hide">
 
 </section>
 
+
+
+<!-- Navbar -->
 <nav class="nav">
 
     <a href="javascript:pageLoad('#payment')" class="nav__link">

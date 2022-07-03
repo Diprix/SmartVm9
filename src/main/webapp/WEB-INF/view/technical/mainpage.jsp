@@ -12,26 +12,33 @@
 
     <title>SmartVM</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/WEB-INF/view/technical/technical.css">
-
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/public/css/technical.css">
 
 
 </head>
 <body id="tecnical_mainpage" class="tecnical_mainpage">
 
 
+    <!-- Scharmata form connessione -->
+    <section id="connectionForm">
 
-<div id="machineproduct">
+        <div class="container">
+            <p>Connetti macchinetta</p>
+            <input id="idMachine" type="text" placeholder="Id macchinetta">
+            <button id="execute" onclick="connectMachine($('#idMachine').val())">Connetti</button>
+
+            <button id="logout" onclick="logout()">Esci</button>
+
+        </div>
+
+    </section>
+
+    <!-- Scharmata tabella prodotti -->
+    <section id="connectionTable" class="hide">
 
 
-</div>
+    </section>
+
 
 </body>
-<!-- gianluca.bianchi@gmail.it -->
-
-<script>
-    $("#machineproduct").load("${pageContext.request.contextPath}/technical/connectionForm.jsp");
-
-</script>
-
 </html>

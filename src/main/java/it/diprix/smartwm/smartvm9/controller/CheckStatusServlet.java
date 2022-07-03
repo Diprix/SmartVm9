@@ -19,16 +19,7 @@ import java.util.List;
 @WebServlet(name = "CheckStatusServlet", value = "/checkstatus")
 public class CheckStatusServlet extends HttpServlet {
 
-    /**
-     * ricevo richieta get da browser
-     *
-     * controllo id macchinetta su db
-     * [se non esiste e creo uno]
-     *
-     * controllo IL TIPO DI MACCHINETTA
-     * periodicamente mando richieta alla servlet come POST che aggiorna le info con ajax
-     *
-     */
+
 
 
     @Override
@@ -36,7 +27,7 @@ public class CheckStatusServlet extends HttpServlet {
         request.setAttribute("idMachine", request.getParameter("idMachine"));
 
 
-
+        // Recupero id macchinetta
         String idMachine  = request.getParameter("idMachine");
 
         List<MachineProduct> machineProductLsit = new ArrayList<>();
@@ -44,16 +35,17 @@ public class CheckStatusServlet extends HttpServlet {
 
 
         try {
-
+            // Ricavo le informazioni della macchinetta
             ResultSet rs1 = DBHelper.getMachineById(Integer.parseInt(idMachine));
 
             if(rs1.next()){
 
-
+                // Ricavo la lista dei prodotti della macchinetta selezionata
                 ResultSet rs2 = DBHelper.getProductList(idMachine);
 
 
 
+                // Creo l'oggetto Machine con le info della macchinetta e una lista di oggetti MachineProduct
                 while (rs2.next()){
                     MachineProduct machineProduct = new MachineProduct();
                     machineProduct.setProductID(rs2.getInt("ID"));
@@ -75,12 +67,17 @@ public class CheckStatusServlet extends HttpServlet {
 
             }
 
+            // Creo un json partendo dal mio oggetto
             String machineJSONString = new Gson().toJson(machine);
 
-           // System.out.println(machineJSONString);
+            // System.out.println(machineJSONString);
 
+
+            response.setContentType("application/json");
             request.setAttribute("machine", machineJSONString);
 
+
+            // Lo invio al client
             PrintWriter out = response.getWriter();
             out.println(machineJSONString);
 

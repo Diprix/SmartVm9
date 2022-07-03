@@ -12,12 +12,24 @@ public class RoutingServlet extends HttpServlet {
 
     RequestDispatcher dispatcher;
 
+    /*
+    Servlet che mi gestisce il routing dell'index
+    Questa classe inoltrera l'utente:
+     - al login se non ha effettuato l'accesso
+     - Alla Mainpage di riferimento in base alla tipologia di utente
+
+     - inoltre mandera tutti i tipi di utenti nella mainpage di CUSTOMER se accederanno da mobile per consentire loro di fare acquisti.
+     */
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String isMobile = request.getParameter("isMobile");
 
         HttpSession currentSession = request.getSession();
         User user = (User) currentSession.getAttribute("user");
+
+        response.setContentType("text/html");
+
 
         if (user == null) {
             dispatcher = request.getRequestDispatcher("/WEB-INF/view/auth/login.jsp");

@@ -21,7 +21,7 @@ function connect(idMachine){
             document.getElementById("main").innerHTML = this.responseText;
         } else if(response == "Macchinetta Occupata"){
 
-            alert("La macchinetta selezionata è momentaneamente occupata o non attiva, riprova più tradi")
+            alert("La macchinetta selezionata e' momentaneamente occupata o non attiva, riprova piu' tradi")
         }
 
 
@@ -79,10 +79,10 @@ function reload(credit){
         function(data, status){
             if(status == "success"){
                 console.log("HAI RICARICATO");
-                alert("Hai caricato " + credit + "€ nel tuo conto")
+                alert("Hai caricato " + credit + " € nel tuo conto")
                 // console.log(data);
 
-                document.getElementById("saldo").innerHTML = data + "€";
+                document.getElementById("saldo").innerText = data + " € ";
             }
         }
     )
@@ -109,19 +109,6 @@ function logout(){
 
 function transaction() {
     console.log('transaction');
-    /*
-    $(document).ready(function() {
-        $("#execute").click(function() {
-            $.post("TransactionServlet",
-                function(data, status) {
-                    if (status == "success")
-                        // $("#transaction").html(data);
-
-                });
-
-        });
-    });
-    */
 
 
     const xhttp = new XMLHttpRequest();

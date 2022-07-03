@@ -20,14 +20,16 @@ public class CreditServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User user = (User) request.getSession().getAttribute("user");
-        double credit = Double.parseDouble(request.getParameter("credit"));
+        double credit = Double.parseDouble(request.getParameter("credit")); // Valore della ricarica
 
 
         try(Connection con = DBHelper.conn()){
 
 
+            // Incremento il credito dell'utente
             double newCredit = user.increaseCredit(credit);
 
+            //Aggiorno il DB
             PreparedStatement statement = con.prepareStatement("UPDATE user SET credit = ? WHERE iduser = ?");
 
             statement.setString(2, user.userIdToString());
@@ -36,15 +38,18 @@ public class CreditServlet extends HttpServlet {
             int status = DBHelper.updateCreditByIdUser(user.userIdToString(), newCredit);
 
             if(status > 0){
+
+               // Aggiorno il credito anche nella sessione
                user.setCredit(newCredit);
                request.getSession().setAttribute("user", user);
 
+               // Registro la transazione
                DBHelper.insertTransaction(0,  new Date(System.currentTimeMillis()), user.getIduser(), 0, credit);
 
             }
 
-            // request.getRequestDispatcher("WEB-INF/view/customer/mainpage.jsp").forward(request, response);
 
+            // Ritorno il credito per aggiornare la grafica
             PrintWriter out = response.getWriter();
             out.print(user.parseCredit());
 

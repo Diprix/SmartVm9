@@ -40,7 +40,7 @@
     <nav>
         <ul>
             <li><a class="active" href="#dashboard">Dashboard</a></li>
-            <li><a href="javascript:getMachineList()">Macchinette</a></li>
+            <li><a href="#machine">Macchinette</a></li>
             <li><a href="#contact">Tecnici</a></li>
             <li><a href="#about">Utenti</a></li>
             <li><a href="#about">Prodotti</a></li>
@@ -54,14 +54,5 @@
     </div>
 
 </body>
-<script>
-    function getMachineList(){
-        const xhttp = new XMLHttpRequest();
-        xhttp.onload = function() {
-            $("#container").html(this.responseText);
-        }
-        xhttp.open("GET", "${pageContext.request.contextPath}/GetMachineListServlet", true);
-        xhttp.send();
-    }
-</script>
+
 </html>

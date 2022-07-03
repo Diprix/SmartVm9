@@ -22,11 +22,13 @@ public class DisconnectMachineServlet extends HttpServlet {
 
         try{
 
+            //Recuper le info della macchinetta
             ResultSet CreditMachineRs = DBHelper.getMachineById(Integer.parseInt(idMachine));
 
             if(CreditMachineRs.next()){
 
 
+                // Aggiorno il credito dell'utente
                 if(user != null) {
                     user.setCredit(CreditMachineRs.getDouble("credit"));
                     request.setAttribute("user", user);
@@ -36,14 +38,12 @@ public class DisconnectMachineServlet extends HttpServlet {
 
                 if(userResult > 0) {
 
-
+                    // Libero la macchinetta e riporto il suo credito a 0
                     int result = DBHelper.updateConnectionMachine(idMachine, "ready", 0.0);
 
                     if(result > 0){
                         System.out.println("Disconnessione eseguita");
 
-//                        PrintWriter out = response.getWriter();
-//                        out.print("disconnected");
 
                         request.getRequestDispatcher("/WEB-INF/view/customer/mainpage.jsp").forward(request, response);
                     } else {
@@ -59,51 +59,5 @@ public class DisconnectMachineServlet extends HttpServlet {
             e.printStackTrace();
         }
     }
-
-//    @Override
-//    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
-//        String idMachine = request.getParameter("idMachine");
-//
-//        System.out.println("Disconnetto la macchinetta: " + idMachine);
-//
-//        try{
-//
-//
-//            ResultSet CreditMachineRs = DBHelper.getMachineById(Integer.parseInt(idMachine));
-//
-//            if(CreditMachineRs.next()){
-//
-//                int userResult = DBHelper.updateCreditByIdUser(CreditMachineRs.getString("status"), CreditMachineRs.getDouble("credit"));
-//
-//
-//                if(userResult > 0) {
-//
-//                    int result = DBHelper.disconnectionMachine(idMachine);
-//
-//
-//                    if(result > 0){
-//                        System.out.println("Disconnessione eseguita");
-//
-//                        PrintWriter out = response.getWriter();
-//                        out.print("Borsellino");
-//                    } else {
-//                        System.out.println("Errore disconnessione");
-//
-//                    }
-//
-//                }
-//
-//            }
-//
-//            // ----------------
-//
-//
-//
-//            // ----------------
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
 
 }

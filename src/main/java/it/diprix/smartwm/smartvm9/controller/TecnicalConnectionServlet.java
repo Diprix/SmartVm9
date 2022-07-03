@@ -19,13 +19,13 @@ import java.util.List;
 public class TecnicalConnectionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String idMachine = (String) request.getParameter("idMachine");
+        String idMachine = request.getParameter("idMachine");
         /*
             Settare stato come SERVICE
-            aprere schermata lista prodotto
-            lista prodotti con qty editabile
+            aprire schermata lista prodotto
         */
 
+        // Recupero informazioni utente
         User user = (User) request.getSession().getAttribute("user");
         request.setAttribute("idMachine", idMachine);
 
@@ -33,11 +33,16 @@ public class TecnicalConnectionServlet extends HttpServlet {
         try{
 
 
+            // Controllo se la macchinetta e' disponibile
             if(checkMachine(idMachine, user)){
                 //MACCHINETTA LIBERA
+
+                // Aggiorno lo stato della macchinetta
                 int status = DBHelper.updateConnectionMachine(idMachine, "service", 0);
 
 
+
+                //Recupero i prodotti
                 if(status > 0){
                     System.out.println("Macchnetta connessa");
                     List<MachineProduct> machineProductLsit = new ArrayList<>();
@@ -54,9 +59,12 @@ public class TecnicalConnectionServlet extends HttpServlet {
                         machineProductLsit.add(machineProduct);
                     }
 
+                    response.setContentType("text/html");
+
+                    // Invio al client una lista di MachineProduct
                     request.setAttribute("tecnicalProductList", machineProductLsit);
 
-                    request.getRequestDispatcher("technical/connected.jsp").forward(request, response);
+                    request.getRequestDispatcher("/WEB-INF/view/technical/connected.jsp").forward(request, response);
 
                 } else {
                     System.out.println("Errore Connessione");
@@ -78,7 +86,7 @@ public class TecnicalConnectionServlet extends HttpServlet {
         try {
 
 
-            ResultSet rs = DBHelper.chackMachine(idMachine, user);
+            ResultSet rs = DBHelper.checkMachine(idMachine, user);
 
             return rs.next();
 

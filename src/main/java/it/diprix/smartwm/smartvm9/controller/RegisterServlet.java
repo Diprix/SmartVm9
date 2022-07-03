@@ -27,10 +27,10 @@ public class RegisterServlet extends HttpServlet {
         RequestDispatcher dispatcher;
 
         System.out.println(name);
-//        HttpSession session = request.getSession();
 
+        response.setContentType("text/html");
 
-        dispatcher = request.getRequestDispatcher("index.jsp");
+        dispatcher = request.getRequestDispatcher("index.html");
 
         if(name != "" && email != "" && password != "" && cpsw != "" && password.equals(cpsw) && phone != ""){
 

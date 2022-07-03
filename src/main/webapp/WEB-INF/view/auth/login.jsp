@@ -24,12 +24,12 @@
             <form action="${pageContext.request.contextPath}/login" method="post" id="signinForm">
 
                 <div class="input-field">
-                    <input value="mario.rossi@hotmail.it" id="email" type="email" placeholder="Enter your email"
+                    <input id="email" type="email" placeholder="Enter your email"
                            name="email" required>
                     <i class="uil uil-envelope icon"></i>
                 </div>
                 <div class="input-field">
-                    <input value="password" type="password" id="psw" class="password" placeholder="Enter your password"
+                    <input type="password" id="psw" class="password" placeholder="Enter your password"
                            name="password" required>
                     <i class="uil uil-lock icon" onclick="shoPsw()"></i>
                     <i class="uil uil-eye-slash showHidePw" onclick="shoPsw()"></i>

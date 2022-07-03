@@ -1,6 +1,9 @@
 
+/*
+Funzioni usate in Login.jsp
+*/
 
-
+// Cambio di form SignIn -> SignUp e viceversa
 function goToLogin(){
     document.getElementById("containerLoginForm").classList.remove("active")
 }
@@ -8,6 +11,7 @@ function goToSignup(){
     document.getElementById("containerLoginForm").classList.add("active")
 }
 
+// Mostra password
 function shoPsw(){
     const pwShowHide = document.querySelectorAll(".showHidePw"),
 
@@ -30,7 +34,12 @@ function shoPsw(){
     })
 }
 
+/*
+Funzione chiamata all'avvio da index.html
+Gestisce il reindirizzamento dell'utente nella pagina di pertinenza
 
+Se si accede da mobile, anche admin e tecnici verranno reindirizzati nella schermata customer per consentire loro di fare acquisti
+ */
 function init(){
 
 
@@ -42,8 +51,6 @@ function init(){
     xhttp.onload = function() {
 
         document.getElementById("main").innerHTML = this.responseText;
-
-
 
     }
     xhttp.open("GET", "RoutingServlet?isMobile=" + check, true);

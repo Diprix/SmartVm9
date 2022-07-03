@@ -98,10 +98,12 @@
         cicleCount = 0;
 
 
+        // Aggiorno la macchinetta ogni 2 secondi
         setInterval(function() {
             loadMachine()
         }, 2000);
 
+        // Funzione che formatta il credito come #,##
         function parseCredit(credit) {
             let amountString = ""+credit;
 
@@ -120,31 +122,43 @@
             return amountString;
         }
 
+        // Funzione principale che carica i prodotti della machhinetta dal DB
         function loadMachine(){
             const xhttp = new XMLHttpRequest();
             xhttp.onload = function() {
 
+                // Elaboro il JSOPN ricevuto dal server
                 const json = this.responseText
                 const obj = JSON.parse(json);
 
 
+                // Scrivo l'ID
                 document.getElementById("idMachine").innerHTML = "ID: " + obj.idMachine;
 
+                // Scrivo il credito della macchinetta
                 document.getElementById("credit_display").value = parseCredit(obj.credit) + " €";
 
+                // Gestisco lo stato della macchinetta
                 if(obj.status == "ready"){
-                    document.getElementById("selection_display").value = "READY";
+                    document.getElementById("selection_display").value = "READY"; //Scrivo READY sul display della macchinetta
+
+                    // Se lo stato e' diverso da READY ( e diverso dagli altri stati predefiniti ), significa che un utente e' connesso, stato = ID_UTENTE.
+                    // Se lo stato e' diverso da READY e precedentemente era READY allora un utente si e' connesso, quindi pulisco il display.
+                    // Resettandolo, sblocco il controllo sulla lungezza del contenuto del display (vedi: distributore.js riga 25)
+
                 } else if(obj.status != "ready" && document.getElementById("selection_display").value == "READY"){
                     document.getElementById("selection_display").value = "";
 
                 } else if(obj.status == "service"){
-                    document.getElementById("selection_display").value = "SERVICE";
+                    document.getElementById("selection_display").value = "SERVICE"; //Scrivo SERVICE sul display della macchinetta
 
                 } else if(obj.status == "off"){
-                    document.getElementById("selection_display").value = "*FUORI SERVIZIO*";
+                    document.getElementById("selection_display").value = "*FUORI SERVIZIO*"; //Scrivo *FUORI SERVIZIO* sul display della macchinetta
 
                 }
 
+                // Se un utente e' connesso, avvio un timer di 1 min,
+                // allo scadere del minuto di inattivita l'utente verra disconnesso.
                 if(obj.status != "ready" && obj.status != "service" && obj.status != "off"){
 
                     //incremento contatore per disconnessione automatica di un utente
@@ -156,6 +170,8 @@
                     }
                 }
 
+                // Inserisco le opzioni della macchinetta
+                // Diventeranno le varie posizioni dove andranno i prodotti
                 document.getElementById("product-list").innerHTML = '<div class="shelf" id="one">\n' +
                     '            <p class="option A1">A1</p>\n' +
                     '            <p class="option A2">A2</p>\n' +
@@ -172,18 +188,22 @@
                     '            <p class="option C9">C9</p>\n' +
                     '        </div>';
 
+                // Inserisco i prodotti nella macchinetta
                 for(var i = 0; i < obj.products.length; i++){
 
 
                     $(".items").append('<div class="item"> ' +
 
-                        str(obj.products[i]) +
+                        // Controllo la quantita dei prodotti,
+                        // se la quantita e' 0 allora inserisco un prodotto senza immagine cosi da riempire un posto nella matrice 3x3
+                        productObj(obj.products[i]) +
 
                         '</div>');
                 }
 
                 $(".items").append('<div class="selector"></div>');
 
+                // Inserisco le etichette con i prezzi dei prodotti
                 for(var i = 0; i < obj.products.length; i++){
                     $(".selector").append('<p class="picker p'+obj.products[i].selection+'">€ '+ parseCredit(obj.products[i].price) +'</p>');
                 }
@@ -193,7 +213,7 @@
             xhttp.send();
         }
 
-        function str(product) {
+        function productObj(product) {
 
                 if(product.qty <= 0) {
                     return '<img class="image e'+product.selection+'">';
@@ -203,7 +223,7 @@
         }
 
         function buy(input){
-            console.log("PROVA ACQUISTO");
+            console.log("ACQUISTO");
             console.log("id", id);
             console.log("input", input);
 
@@ -224,14 +244,17 @@
                         console.log("HAI COMPRATO");
 
 
+                        // Elaboro il prodotto ricevuto dal server
                         const json = data
                         const obj = JSON.parse(json);
 
                         const product = obj;
 
+                        // Inserisco il prodotto nella parte bassa della macchinetta,
+                        // per simularne l'acquisto. Cliccandolo si rimuovera.
                         $(".tests").append('<div class="item" id="purchased" onclick="this.remove()"> ' +
 
-                            '<img class="image '+product.selection+'" src="../assets/images/' + product.productID + '.png" alt="'+product.selection+'">' +
+                            '<img class="image '+product.selection+'" src="${pageContext.request.contextPath}/assets/images/' + product.productID + '.png" alt="'+product.selection+'">' +
 
                             '</div>');
 
@@ -241,6 +264,8 @@
             )
         }
 
+        // Disconnessione macchinetta
+        // Usato per la disconnessione automatica
         function disconnect(){
             console.log("DISCONNETTI");
             console.log(id);
@@ -258,6 +283,7 @@
 
 
     </script>
+
 <script src="distributore.js"></script>
 
 </html>

@@ -11,20 +11,6 @@ import java.sql.ResultSet;
 
 @WebServlet(name = "ConnectMachineServlet", value = "/connect")
 public class ConnectMachineServlet extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        out.print("Working: ");
-        out.println(request.getParameter("idMachine"));
-
-        User user = (User) request.getSession().getAttribute("user");
-        out.println(user.getEmail());
-
-        request.getRequestDispatcher("customer/connected.jsp").forward(request, response);
-
-
-        //Settare machine.status con id cliente
-    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,36 +19,37 @@ public class ConnectMachineServlet extends HttpServlet {
         request.setAttribute("idMachine", idMachine);
         double userCredit = user.getCredit();
 
+        response.setContentType("text/html");
+
+
         try{
 
             /*
-            * CONTROLLO SE LA MACCHINETTA è READY
+            * CONTROLLO SE LA MACCHINETTA e' READY
             * CONTROLLO SE NON HO GIA OCCUPATO UNA MACCHINETTA
             * OCCUPO LA MACCHINETTA
             */
 
             if(checkMachine(idMachine, user)){
                 //MACCHINETTA LIBERA
+
+                //Occupo la macchinetta
                 int status = DBHelper.updateConnectionMachine(idMachine, user.userIdToString(), userCredit);
 
 
                 if(status == 1){
                     //MACCHINETTA LIBERA
-                    //out.print("Macchnetta connessa");
                     System.out.println("Macchnetta connessa");
 
-                    // response.sendRedirect("customer/connected.jsp");
 
-                    request.getRequestDispatcher("WEB-INF/view/customer/connected.jsp").forward(request, response);
+                    request.getRequestDispatcher("/WEB-INF/view/customer/connected.jsp").forward(request, response);
 
                 } else {
-                    //out.print("Errore Connessione");
                     System.out.println("Errore Connessione");
                 }
             } else {
                 //MACCHINETTA OCCUPATA
 
-                //out.print("Macchinetta Occupata");
                 System.out.println("Macchnetta Occupata");
                 PrintWriter out = response.getWriter();
                 out.print("Macchinetta Occupata");
@@ -77,12 +64,12 @@ public class ConnectMachineServlet extends HttpServlet {
         try {
 
             /*
-             * CONTROLLO SE LA MACCHINETTA è READY
+             * CONTROLLO SE LA MACCHINETTA e' READY
              * CONTROLLO SE NON HO GIA OCCUPATO UNA MACCHINETTA
              * OCCUPO LA MACCHINETTA
              */
 
-            ResultSet rs = DBHelper.chackMachine(idMachine, user);
+            ResultSet rs = DBHelper.checkMachine(idMachine, user);
 
             return rs.next();
 

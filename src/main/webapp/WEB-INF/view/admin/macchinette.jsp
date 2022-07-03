@@ -15,7 +15,9 @@
 <%
     int machineListCount = machineList.size();
 %>
+
 <ol>
+
 <%--<c:forEach items="${machineList}" var="machine">--%>
 <%--    <li>${machine.idmachine}</li>--%>
 <%--</c:forEach>--%>

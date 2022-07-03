@@ -51,12 +51,16 @@
                                 "</section> " +
 
                                 "<section class=\"dx\"> " +
+
                                 "<h4 class=");
+
+                //Assegno colore al valore della transazione
                 if(result.get(i).getAmount() < 0){
                     out.print("red");
                 } else {
                     out.print("green");
                 }
+
                 out.print(">");
 
                 out.print(parseCredit(result.get(i).getAmount()));
@@ -73,6 +77,8 @@
         %>
 
         <%!
+
+            //Metodo che mi formatta il credito
             public String parseCredit(double amount) {
                 String amountString = ""+amount;
                 amountString = amountString.replace(".", ",");
@@ -81,17 +87,6 @@
             }
         %>
 
-
-        <%--<div class="card row white">
-            <section class="sx">
-                <h4>1234</h4>
-                <p>15/05/25 - Acquisto</p>
-            </section>
-            <section class="dx">
-                <h4>0,5 €</h4>
-            </section>
-        </div>
---%>
 
     </div>
 

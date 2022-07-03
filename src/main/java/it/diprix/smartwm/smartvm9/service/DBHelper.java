@@ -13,7 +13,7 @@ public class DBHelper {
 
     public static Connection conn() throws NamingException, SQLException {
         Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/smartVM");
+        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/diprimio");
         Connection connection = ds.getConnection();
         return connection;
     }
@@ -118,7 +118,7 @@ public class DBHelper {
         return 0;
     }
 
-    public static ResultSet chackMachine(String id, User user) {
+    public static ResultSet checkMachine(String id, User user) {
         try(Connection con = conn()){
 
             PreparedStatement statement = con.prepareStatement("" +
@@ -179,7 +179,7 @@ public class DBHelper {
         try(Connection con = conn()){
 
             PreparedStatement preparedStatement = con.prepareStatement(
-                    "UPDATE stock SET quantity = CASE WHEN quantity > 0 THEN quantity - 1 ELSE 0 END " + //doppio controllo quantità magiiore di 0
+                    "UPDATE stock SET quantity = CASE WHEN quantity > 0 THEN quantity - 1 ELSE 0 END " + //doppio controllo quantita' magiiore di 0
                             "WHERE ref_machine = ? AND selection = ? AND quantity > 0"
             );
 
@@ -219,7 +219,7 @@ public class DBHelper {
         try(Connection con = conn()){
 
             PreparedStatement preparedStatement = con.prepareStatement(
-                    "UPDATE machine SET credit = CASE WHEN credit > "+ price +" THEN "+ newCredit +" ELSE 0 END " + //doppio controllo quantità magiiore di 0
+                    "UPDATE machine SET credit = CASE WHEN credit > "+ price +" THEN "+ newCredit +" ELSE 0 END " + //doppio controllo quantita' magiiore di 0
                             "WHERE idmachine = ? AND credit >= " + price
             );
 

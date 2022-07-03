@@ -24,6 +24,10 @@ public class LoginServlet extends HttpServlet {
         String password  = request.getParameter("password");
 
         HttpSession oldSession = request.getSession(false);
+
+        response.setContentType("text/html");
+
+
         if(oldSession != null){
             oldSession.invalidate(); //invalida vecchia sessione
         }
@@ -61,6 +65,7 @@ public class LoginServlet extends HttpServlet {
                 user.setPhone(rs.getString("phone"));
                 user.setUser_type(rs.getString("user_type"));
 
+                // Salvo l'utente nella sessione
                 currentSession.setAttribute("user", user);
                 currentSession.setAttribute("credit", rs.getDouble("credit"));
                 currentSession.setAttribute("idUser", rs.getInt("idUser"));
@@ -69,14 +74,14 @@ public class LoginServlet extends HttpServlet {
                 request.setAttribute("status", "success");
                 request.setAttribute("msg", "Login");
 
-                response.sendRedirect("index.jsp");
+                response.sendRedirect("index.html");
 
 
             } else {
                 request.setAttribute("status", "error");
                 request.setAttribute("msg", "Email o Password errati");
 
-                dispatcher = request.getRequestDispatcher("index.jsp");
+                dispatcher = request.getRequestDispatcher("index.html");
                 dispatcher.forward(request, response);
 
             }

@@ -26,8 +26,11 @@ public class TransactionServlet extends HttpServlet {
 
         try{
 
+            // Recupero le transazioni dell'utente
             ResultSet rs = DBHelper.getTransactionsByIdUser(user.getIduser());
 
+
+            // Creo una lista di transazioni
             while(rs.next()){
                 Transaction transaction = new Transaction();
                 transaction.setAmount(rs.getDouble("amount"));
@@ -39,17 +42,17 @@ public class TransactionServlet extends HttpServlet {
                 transactionList.add(transaction);
             }
 
+            // Creo un JSON partendo dall'oggetto creato
             String transactionJSONString = new Gson().toJson(transactionList);
             System.out.println(transactionJSONString);
 
-           // JSON // request.setAttribute("transactionList", transactionJSONString);
+            // Invio il json al client
+            response.setContentType("application/json");
             request.setAttribute("transactionList", transactionList);
 
             request.getRequestDispatcher("WEB-INF/view/customer/transaction.jsp").forward(request, response);
 
 
-//            PrintWriter out = response.getWriter();
-//            out.print(transactionJSONString);
 
         }catch (Exception e){
             e.printStackTrace();

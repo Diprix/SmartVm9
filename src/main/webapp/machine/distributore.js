@@ -4,23 +4,34 @@ class VendingMachine {
         this.selectVals();
     }
 
+    /*
+    Gestione del tastierino
+    Consente di inserire un codice composto da due caratteri
+    All'inserimento del terzo il display viene resettato
+     */
     selectVals() {
-        // var yo = (this); // solution 2
+
         this.display = document.getElementById("selection_display");
+
         const buttons = document.getElementsByClassName("btn");
+
+        // Aggiungo unazione per ogni tasto del tastierino
         for (let i = 0; i < buttons.length; i++) {
-            //buttons[i].addEventListener('click', function(e) { //solution 2
+
             buttons[i].addEventListener("click", e => {
 
+                // Controllo lunghetta codice inserito
+                // Se il contenuto di display e' maggiore di 2 non posso piu inserire caratteri.
+                // (Utile per bloccare l'iterazione dell'utente)
 
                 if (this.display.value.length < 2) {
                     this.display.value += e.srcElement.innerHTML;
                 }
+
                 if (this.display.value.length == 2) {
-                    // yo.validate(display); //solution 2
-                    // this.validate(display); // solution 1
-                    if (this.validate()) { //Controllo se è la scelta esiste
-                        return this.getSelectedItem();
+
+                    if (this.validate()) { //Controllo se e' la scelta esiste
+                        return this.getSelectedItem(); // Recupero il prodotto
                     }
                     return this.resetVals();
                 }
@@ -28,6 +39,7 @@ class VendingMachine {
         }
     }
 
+    // Controllo se il codice inserito e' presente tra le opzioni presenti
     validate() {
         const options = document.getElementsByClassName("option");
         for (let i = 0; i < options.length; i++) {
@@ -38,46 +50,22 @@ class VendingMachine {
         }
     }
 
+    // Pulisco il display
     resetVals() {
         console.log("reset");
         this.display.value = "";
     }
 
+    // Recupero il prodotto e avvio la procedura di l'acquisto
     getSelectedItem() {
-        console.log("Getting drink " + this.display.value);
+        console.log("Recupero il prodotto con codice: ", this.display.value);
         // this.getPosition();
         buy(this.display.value);
+
+        // Resetto il display dopo l'acquisto
         this.resetVals();
     }
 
-    getPosition() {
-        var item = document.getElementsByClassName("e" + this.display.value);
-        // Position of selected .item
-        const positionItem = item[0].getBoundingClientRect();
-
-        console.log(
-            positionItem.top,
-            positionItem.right,
-            positionItem.bottom,
-            positionItem.left
-        );
-        // Position of .grab
-        const grab = document.getElementsByClassName("grab");
-        const positionGrab = grab[0].getBoundingClientRect();
-
-        console.log(
-            positionGrab.top,
-            positionGrab.right,
-            positionGrab.bottom,
-            positionGrab.left
-        );
-
-        // Change position of Item
-        item[0].style.position = "absolute";
-        item[0].style.top = "100px";
-        item[0].style.left = "-50px";
-
-    }
 
 
 }
