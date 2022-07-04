@@ -1,88 +1,89 @@
-drop schema if exists smartVM;
+drop schema if exists diprimio;
 
-create database IF NOT exists smartVM;
-use smartVM;
+create database IF NOT exists diprimio;
+use diprimio;
 
-CREATE TABLE smartVM.user (
-                              iduser INT NOT NULL auto_increment,
-                              name VARCHAR(45) NULL,
-                              phone VARCHAR(45) NOT NULL,
-                              credit double DEFAULT 0.00,
-                              email VARCHAR(45) NOT NULL unique,
-                              user_type VARCHAR(45) DEFAULT "customer",
-                              password VARCHAR(45) NULL,
-                              PRIMARY KEY (iduser));
-
-
-CREATE TABLE smartVM.machine (
-                                 idmachine INT NOT NULL,
-                                 type VARCHAR(45) NULL,
-                                 status VARCHAR(45) NULL,
-                                 credit double DEFAULT 0.00,
-                                 PRIMARY KEY (idmachine));
+CREATE TABLE diprimio.user (
+                               iduser INT NOT NULL auto_increment,
+                               name VARCHAR(45) NULL,
+                               phone VARCHAR(45) NOT NULL,
+                               credit double DEFAULT 0.00,
+                               email VARCHAR(45) NOT NULL unique,
+                               user_type VARCHAR(45) DEFAULT "customer",
+                               password VARCHAR(45) NULL,
+                               PRIMARY KEY (iduser));
 
 
+CREATE TABLE diprimio.machine (
+                                  idmachine INT NOT NULL,
+                                  type VARCHAR(45) NULL,
+                                  status VARCHAR(45) NULL,
+                                  credit double DEFAULT 0.00,
+                                  position VARCHAR(45) NULL,
+                                  PRIMARY KEY (idmachine));
 
 
-CREATE TABLE smartVM.product (
-                                 idproduct INT NOT NULL,
-                                 description VARCHAR(255) NULL,
-                                 price DOUBLE NULL,
-                                 PRIMARY KEY (idproduct));
 
-CREATE TABLE smartVM.stock (
-                               idstock INT NOT NULL AUTO_INCREMENT,
-                               quantity INT NULL DEFAULT 0,
-                               selection VARCHAR(2) NOT NULL,
-                               ref_product INT NOT NULL,
-                               ref_machine INT NOT NULL,
-                               PRIMARY KEY (idstock),
-                               INDEX link_machine_idx (ref_machine ASC),
-                               INDEX link_product_idx (ref_product ASC),
-                               CONSTRAINT link_machine
-                                   FOREIGN KEY (ref_machine)
-                                       REFERENCES smartVM.machine (idmachine)
-                                       ON DELETE NO ACTION
-                                       ON UPDATE NO ACTION,
-                               CONSTRAINT link_product
-                                   FOREIGN KEY (ref_product)
-                                       REFERENCES smartVM.product (idproduct)
-                                       ON DELETE NO ACTION
-                                       ON UPDATE NO ACTION);
 
-CREATE TABLE smartVM.transaction (
-                                     idtransaction INT AUTO_INCREMENT,
-                                     ref_selection INT NOT NULL,
-                                     date_transaction DATE DEFAULT NULL,
-                                     cod_user INT NOT NULL,
-                                     cod_machine INT NOT NULL,
-                                     amount double DEFAULT 0.00,
-                                     PRIMARY KEY (idtransaction),
+CREATE TABLE diprimio.product (
+                                  idproduct INT NOT NULL,
+                                  description VARCHAR(255) NULL,
+                                  price DOUBLE NULL,
+                                  PRIMARY KEY (idproduct));
+
+CREATE TABLE diprimio.stock (
+                                idstock INT NOT NULL AUTO_INCREMENT,
+                                quantity INT NULL DEFAULT 0,
+                                selection VARCHAR(2) NOT NULL,
+                                ref_product INT NOT NULL,
+                                ref_machine INT NOT NULL,
+                                PRIMARY KEY (idstock),
+                                INDEX link_machine_idx (ref_machine ASC),
+                                INDEX link_product_idx (ref_product ASC),
+                                CONSTRAINT link_machine
+                                    FOREIGN KEY (ref_machine)
+                                        REFERENCES diprimio.machine (idmachine)
+                                        ON DELETE NO ACTION
+                                        ON UPDATE NO ACTION,
+                                CONSTRAINT link_product
+                                    FOREIGN KEY (ref_product)
+                                        REFERENCES diprimio.product (idproduct)
+                                        ON DELETE NO ACTION
+                                        ON UPDATE NO ACTION);
+
+CREATE TABLE diprimio.transaction (
+                                      idtransaction INT AUTO_INCREMENT,
+                                      ref_selection INT NOT NULL,
+                                      date_transaction DATE DEFAULT NULL,
+                                      cod_user INT NOT NULL,
+                                      cod_machine INT NOT NULL,
+                                      amount double DEFAULT 0.00,
+                                      PRIMARY KEY (idtransaction),
 
 
     /*UNIQUE INDEX ref_selection_UNIQUE (ref_selection ASC),*/
 
-                                     KEY selection_idx (cod_user),
-                                     KEY selection_machine_idx (cod_machine),
-                                     CONSTRAINT selection_machine FOREIGN KEY (cod_machine)
-                                         REFERENCES machine (idmachine),
-                                     CONSTRAINT selection_user FOREIGN KEY (cod_user)
-                                         REFERENCES user (iduser)/*,
+                                      KEY selection_idx (cod_user),
+                                      KEY selection_machine_idx (cod_machine),
+                                      CONSTRAINT selection_machine FOREIGN KEY (cod_machine)
+                                          REFERENCES machine (idmachine),
+                                      CONSTRAINT selection_user FOREIGN KEY (cod_user)
+                                          REFERENCES user (iduser)/*,
     CONSTRAINT link_selection FOREIGN KEY (ref_selection)
-        REFERENCES smartVM.stock (idstock)*/
+        REFERENCES diprimio.stock (idstock)*/
 
-                                         ON DELETE NO ACTION ON UPDATE NO ACTION
+                                          ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
 
 /* Popolamento tabelle DEMO */
 
 
-insert into machine(idMachine, type, status) values
-                                                 ("1234", "snack", "ready"),
-                                                 ("5678", "drint", "service"),
-                                                 ("0", "virtual", "virtual"),
-                                                 ("2468", "snack", "ready");
+insert into machine(idMachine, type, status, position) values
+                                                           ("1234", "snack", "ready", "Viale delle Scienze, Edificio 6, Palermo"),
+                                                           ("5678", "drint", "off", "Viale delle Scienze, Edificio 18, Palermo"),
+                                                           ("0", "virtual", "off", null),
+                                                           ("2468", "snack", "ready", "Viale delle Scienze, Edificio 2, Palermo");
 
 insert into user(name, phone, credit, email, user_type, password) values
                                                                       ("Mario Rossi", "3552645789", 5.44, "mario.rossi@hotmail.it", "CUSTOMER", "password"),
