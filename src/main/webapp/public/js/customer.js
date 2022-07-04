@@ -1,3 +1,4 @@
+
 /*
 HOME
  */
@@ -93,6 +94,7 @@ function reload(credit){
 OTHER
  */
 
+
 function logout(){
 
     console.log("LOGOUT")
@@ -145,4 +147,5 @@ function pageLoad(pageId) {
 
         })
     })
-};
+}
+

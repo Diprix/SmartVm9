@@ -63,7 +63,11 @@
         </div>
         <div class="coins">
             <div class="money">
-                <div class="circle"></div>
+                <div class="circle"></div> <%-- Disattivare questo prima di abilitare il QRCODE --%>
+
+                <%-- QRCODE --%>
+<%--            <img src="https://chart.googleapis.com/chart?cht=qr&chl=${idMachine}&chs=80x80&chld=L|0" class="qr-code img-thumbnail img-responsive" />--%>
+
             </div>
         </div>
     </div>
