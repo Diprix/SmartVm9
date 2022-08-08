@@ -26,7 +26,6 @@ public class CheckStatusServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("idMachine", request.getParameter("idMachine"));
 
-
         // Recupero id macchinetta
         String idMachine  = request.getParameter("idMachine");
 
@@ -48,11 +47,13 @@ public class CheckStatusServlet extends HttpServlet {
                 // Creo l'oggetto Machine con le info della macchinetta e una lista di oggetti MachineProduct
                 while (rs2.next()){
                     MachineProduct machineProduct = new MachineProduct();
+
                     machineProduct.setProductID(rs2.getInt("ID"));
                     machineProduct.setDescription(rs2.getString("PRODUCT"));
                     machineProduct.setPrice(rs2.getDouble("PRICE"));
                     machineProduct.setQty(rs2.getInt("QTY"));
                     machineProduct.setSelection(rs2.getString("SEL"));
+
                     machineProductLsit.add(machineProduct);
 
                 }

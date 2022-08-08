@@ -14,6 +14,7 @@
 <input type="hidden" id="msg" value="<%= request.getAttribute("msg") %>">
 
 <div class="container" id="containerLoginForm">
+
     <div class="forms">
         <!-- Login Form -->
 
@@ -58,6 +59,7 @@
                     </span>
             </div>
         </div>
+
 
         <!-- Registration Form -->
         <div class="form signup">
@@ -111,7 +113,73 @@
                     </span>
             </div>
         </div>
+
     </div>
+
+
+
+
+</div>
+<%--<button>Try Demo</button>--%>
+<div class="container" id="containerLoginFormDemo">
+
+    <div class="forms">
+        <!-- Login Form -->
+
+        <div class="form login" >
+
+            <span class="title">Login Guest</span>
+
+            <form action="${pageContext.request.contextPath}/login" method="post" id="signinFormDemo">
+                <div class="checkbox-text">
+                    <div class="checkbox-content">
+                        <input type="checkbox" checked onclick="document.getElementById('containerLoginFormDemo').style.display = 'none'">
+                        <label for="sigCheck" class="text">Show Demo</label>
+                    </div>
+
+                </div>
+                <div class="input-field">
+                    <input type="hidden" value="mario.rossi@hotmail.it" id="emailDemo" type="email" placeholder="Enter your email"
+                           name="email" required>
+                    <div class="input-field button">
+                        <a href="${pageContext.request.contextPath}/machine/distributore.jsp?idMachine=1234" target="_blank"><input type="button" value="Demo Machine 1"></a>
+                    </div>
+
+                </div>
+                <div class="input-field">
+                    <input type="hidden" value="password" id="pswDemo" class="password" placeholder="Enter your password"
+                           name="password" required>
+                    <div class="input-field button">
+                        <a href="${pageContext.request.contextPath}/machine/distributore.jsp?idMachine=2468" target="_blank"><input type="button" value="Demo Machine 2"></a>
+                    </div>
+
+                </div>
+
+                <div class="checkbox-text" style="visibility: hidden">
+                    <div class="checkbox-content">
+                        <input type="checkbox" >
+                        <label for="sigCheck" class="text">Remember me</label>
+                    </div>
+
+                    <a href="#" class="text">Forgot password?</a>
+                </div>
+
+                <div class="input-field button">
+                    <input type="submit" value="Login Guest">
+                </div>
+
+
+            </form>
+
+
+
+        </div>
+
+    </div>
+
+
+
+
 </div>
 
 

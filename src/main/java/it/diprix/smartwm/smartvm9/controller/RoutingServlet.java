@@ -41,6 +41,7 @@ public class RoutingServlet extends HttpServlet {
                 dispatcher = request.getRequestDispatcher("/WEB-INF/view/customer/mainpage.jsp");
 
             } else {
+
                 switch (user_type){
                     case "CUSTOMER":
                         dispatcher = request.getRequestDispatcher("/WEB-INF/view/customer/mainpage.jsp");

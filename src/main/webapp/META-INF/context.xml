@@ -7,13 +7,13 @@
 		minIdle="2"
         maxIdle="6"
 		maxWait="1000"
-		name="jdbc/diprimio"
+		name="jdbc/smartvm"
 		encrypt="true"
 		trustServerCertificate="false"
-		username="smartVM"
-		password="smartVM22"
+		username="diprix"
+		password="Astrogame97#"
 		type="javax.sql.DataSource"
-		url="jdbc:mysql://localhost:3306/diprimio?useLegacyDatetimeCode=false&amp;serverTimezone=Europe/Rome"
+		url="jdbc:mysql://5.249.155.102:3306/smartvm?useLegacyDatetimeCode=false&amp;serverTimezone=Europe/Rome"
 		testOnBorrow="true"
 		validationQuery="SELECT 1" />		
 </Context>

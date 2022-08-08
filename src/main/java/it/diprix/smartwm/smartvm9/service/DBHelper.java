@@ -13,7 +13,7 @@ public class DBHelper {
 
     public static Connection conn() throws NamingException, SQLException {
         Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/diprimio");
+        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/smartvm");
         Connection connection = ds.getConnection();
         return connection;
     }
