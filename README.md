@@ -1,8 +1,10 @@
+TRY HERE: https://smartvm.oscardiprimio.it
+
 ## SMART VENDING MACHINE
 
 ## TEAM DI SVILUPPO
 
-Oscar Di Primio ( 0745795 )
+Oscar Di Primio 
 
 ## GENERAL DESCRIPTION
 
