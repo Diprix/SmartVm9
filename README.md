@@ -1,212 +1,191 @@
-# SmartVm9
-Smart>VM Tomcat 9
+## SMART VENDING MACHINE
 
-# Background Aziendale
-Amministratore Condomini S.p.A. ha deciso di sviluppare una piattaforma per 
-la gestione delle operazioni di contabilizzatione, archiviazione pratiche,
-scadenziario, statistiche e il in-out con i clienti.
-La scelta nasce da un problema di sicurezza poichè i dati devono restare 
-interni all'azienda e sempre disponibili agli operatori, nonchè evitare il
-salvataggio di file riservati su cloud pubblici da parte propri dipendi.
+## TEAM DI SVILUPPO
 
-Dopo una software selection ha deciso di sviluppare internamente la propria 
-soluzione per non legarsi ad una soluzione commerciale.
+Oscar Di Primio ( 0745795 )
 
-Le tecnologie da utilizzare sono da definire.
+## GENERAL DESCRIPTION
 
-### WorkProject
+Si vuole realizzare un sistema smart che consenta di acquistare prodotti da distributori
+automatici mediante l’utilizzo di un’apposita interfaccia web.
 
-Siete stati ingaggiati da "L'Amministratore Condomini S p A" per la realizzazione della nuova piattaforma 
-tecnologica per la gestione della contabilità aziendale.
+Dopo la registrazione e l’accesso l’utente potrà connettersi ad una macchinetta, ricaricare il
+credito del proprio account e vedere la lista delle proprie transazioni.
 
-Dopo una lunga serie d' incontri con i referenti di business e con i tecnici de "LA CAMBIALE" S p A si è stabilito che:
+Le macchinette saranno sempre raggiungibili e mostreranno i prodotti disponibili, il loro stato e
+il credito dell’utente quando quest’ultimo si connetterà. Per semplicità si è deciso di permettere
+l’acquisto di prodotti soltanto tramite app, non è quindi prevista la possibilità di usare soldi
+contanti.
 
-* I concetti principali sono quello di Team di lavoro, di Bucket come contenitore di file
+## MOCKUP IDEA:
 
-* Gli utenti potranno avere il proprio accesso riservato e condividere i dati non 
-  riservati con il mainframe aziendale:
-    * creare i clienti 
-    * stabilire i canoni in abbonamento ed inserire i servizi e le competenze.
-    * inviare notifiche hai clienti sulle scadenze.
-    * registrare i corrispettivi.
-    * generare report e statistiche.
+Funzionalità di base
 
-* La soluzione deve essere cloud ready e rilasciabile su container docker
-
-* La tecnologia di riferimento dovrà essere basata sullo stack Java Enterprise e sull'ecosistema
-  Spring
-  
-* Al fine di non perdere opportunità di business, e dunque fatturato per l'azienda, è 
-  indispensabile che il sistema sia progettato per garantire i più alti livelli di servizio
-–
-Gli aspetti di sicurezza sono molto importanti in quanto i documenti potrebbero essere
-  utilizzati per operazioni di insider trading
-
-
-## Requirements and Assumptions
-#### Functional Requirements
-[FR01]: Il sistema deve consentire agli utenti di creare clienti, causali.
-
-[FR02]: Il sistema deve consentire agli utenti di creare schede contabili, 
-        inserire i pagamenti e generare report.
-
-[FR03]: Il sistema deve consentire agli utenti di inviare notifiche ai clienti.
-
-[FR04]: Il sistema deve consentire agli utenti di caricare corrispettivi e gestire i movimenti per anno.
-
-
-#### Non Functional Requirements
-[NFR01]: Il sistema deve garantire un uptime continuativo 24 ore al giorno 7 gironi su 7
-
-[NFR02]: E' necessario prendere in considerazione gli aspetti di sicurezza e logging per l'accesso alle risorse
-
-[NFR03]: Lo stack tecnologico di riferimento è Spring Framework e i prodotti da utilizzare devono essere free o open-source
-
-[NFR04]: Il sistema sarà dispiegato su una infrastruttura tradizionale, ma deve essere pronto a migrare su una infrastruttura
-cloud a Container(in realtà  la soluzione sarà decisa dal team di sviluppo)
-
-[NFR05]: Il sistema sarà utilizzabile tramite la totalità dei dispositivi portatili maggiormente diffusi, accessibile da web,
-e utilizzabile come applicazione residente.
-
-
-#### Business Assumptions
-
-[BA01]: Il sistema è attualmente pensato per il mercato italiano ma si ipotizza in un futuro prossimo di aprire anche al mercato
-europeo
-
-[BA02]: Da indagini è atteso un trend crescente di documenti caricati
-
-
-#### Integration Assumptions
-
-[IA01]: Il sistema verrà rilasciato con accesso e autenticazione nativa Spring Autentication, ma anche la possibilità
-di sistemi di autenticazione Push Service Cloud (google, facebook, apple...)
-
-## Requirements and Assumptions
-#### Technological Assumptions
-
-[TA01]: L'architettura del sistema sara basata su Java EE 11 JDK 1.11 (AMAZON Corretto 11.2).
-
-[TA02]: Lo strato di business sarà realizzato tramite la suite Spring.
-
-[TA03]: Lo strato di presentation sarà basato su framewotk javascript con backend RESTful.
-
-[TD04]: L'autenticazione e l'autorizzazione verrà garantita da SSO su protocollo OpenId Connect con token JWT
-
-[TD05]: Il disaccopiamento tra frontend e backend verrà garantito dall'adozione di Api Gateway.
-
-[TD04]: Lo strato di persistenza dell'applicativo sarà realizzato tramite JPA.
-
-[TD06]: I moduli dovranno essere dispiegati o tramite Spring Boot su Tomcat Embedded e a questi moduli saranno
-        delegati tutti gli aspetti di gestione del pool di connessioni http, jdbc , jms ,
-
-[TD07]: Il database per l'archiviazione delle credenziali d'accesso sarà MongoDB.
-
-[TD08]: Il database per l'archiviazione dei dati sarà Postgress.
-
-[TD09]: Il sistema operativo dei server sarà CentOS o similari.
-
-
-MockUps
-
-![Alt text](src/main/resources/assets/images/Home.png?raw=true "NorthenLight")
-
-
-![Alt text](src/main/resources/assets/images/ElencoClienti.png?raw=true "Clienti")
-
-
-![Alt text](src/main/resources/assets/images/Report.png?raw=true "Report")
-
-
-## Rest Api Documentation
-
-#### Metodi pubblici
-
-| METHOD | ACTION | URL |
-| ------ | ------ | ------ |
-| GET | SignIn | [/api/auth/signin](http://localhost:8082/api/auth/signin) |
-| POST | SignIn | [/api/auth/signup](http://localhost:8082/api/auth/signup) |
-
-#### Metodi con Autenticazione necessaria ( all for Account connected )
-
-| METHOD | ACTION | URL |
-| ------ | ------ | ------ |
-| GET | List of payments | [/api/v1/payaments](http://localhost:8082/api/v1/payments) |
-| GET | List of customers | [/api/v1/customers](http://localhost:8082/api/v1/customers) |
-| GET | List of reaons | [/api/v1/reasons](http://localhost:8082/api/v1/reaons) |
-| POST | Create a payment | [/api/v1/payament](http://localhost:8082/api/v1/payment) |
-| POST | Create a customer | [/api/v1/customer](http://localhost:8082/api/v1/customer) |
-| POST | Create a reason | [/api/v1/reason](http://localhost:8082/api/v1/reason) |
-| GET | Retrive a payment | [/api/v1/payament/{id}](http://localhost:8082/api/v1/payment/) |
-| GET | Retrive a customer | [/api/v1/customer/{id}](http://localhost:8082/api/v1/customer/) |
-| GET | Retrive a reason | [/api/v1/reason/{id}](http://localhost:8082/api/v1/reaon/) |
-
-Spring Boot Rest APIs for File Upload & Storage
-
-Spring Boot App will provide APIs
-Methods	Urls	Actions
-POST	/upload	upload a File
-GET	/files	get List of Files (name & url)
-GET	/files/[filename]	download a File
-## Upload Files
-
-    GET /: Looks up the current list of uploaded files from the StorageService and loads it into a Thymeleaf template. It calculates a link to the actual resource by using MvcUriComponentsBuilder.
-
-    GET /files/{filename}: Loads the resource (if it exists) and sends it to the browser to download by using a Content-Disposition response header.
-
-    POST /: Handles a multi-part message file and gives it to the StorageService for saving.
-
-
-
-```sh
-
+- Vista utente consumatore (Smartphone)
+- Vista macchinetta
 
 ```
-### Ecosystem
+Un’interfaccia che permette all’utente di connettersi ad una macchinetta inserendo il codice
+identificativo della stessa.
+```
+```
+Un’interfaccia che simula il funzionamento di un distributore automatico semplificato.
+```
 
-![Alt text](src/main/resources/assets/logo/spring_icon.png?raw=true?v=4&s=200  "Spring Boot")
-![Alt text](src/main/resources/assets/logo/mongo_icon.png?raw=true?v=4&s=200 "Mongo DB")
-![Alt text](src/main/resources/assets/logo/java_icon.png?raw=true?v=4&s=200 "Java EE")
-![Alt text](src/main/resources/assets/logo/maven_icon.png?raw=true?v=4&s=200 "Maven")
-![Alt text](src/main/resources/assets/logo/jwt_icon.png?raw=true?v=4&s=200 "JWT")
-![Alt text](src/main/resources/assets/logo/jpa_icon.png?raw=true?v=4&s=200 "JPA")
-![Alt text](src/main/resources/assets/logo/postgres_icon.png?raw=true?v=4&s=200 "Postgres")
-![Alt text](src/main/resources/assets/logo/angular_icon.png?raw=true?v=4&s=200 "Angular")
-![Alt text](src/main/resources/assets/logo/flutter_icon.png?raw=true?v=4&s=200 "Flutter")
+Funzionalità Interfaccia Cliente
+
+- Registrazione e Accesso al servizio
+- Collegamento macchinetta
+- Ricarica conto
+- Disconnessione macchinetta
+- Vista transazioni recenti
+- Logout
+
+Funzionalità macchinetta
+
+- Visualizzare prodotti disponibili
+- Visualizzare lo stato della macchinetta
+- Visualizzare il credito della macchinetta
+- Permettere all’utente di selezionare un prodotto mediante l’apposito tastierino
+
+```
+Lo stato della macchinetta può essere:
+```
+- READY: indica che la macchinetta è libera e pronta per essere utilizzata.
+    Questo stato viene rappresentato con la scritta READY sul display della macchinetta.
+    In questo stato la macchinetta non consente interazioni con il tastierino.
+- BUSY: indica che un utente è connesso alla macchinetta.
+    Questo stato viene rappresentato mostrando il credito dell’utente sul display della
+    macchinetta
+    In questo stato la macchinetta consente l’acquisto di prodotti.
+- SERVICE: indica che un tecnico sta operando sulla macchinetta
+    Questo stato viene rappresentato con la scritta SERVICE sul display della macchinetta.
+    In questo stato la macchinetta non consente interazioni con il tastierino.
+    In questo stato la macchinetta non accetta connessioni da parte degli utenti
+    consumatori.
+
+## SYSTEM ARCHITECTURE
+
+Tecnologie utilizzate:
+
+1. Ho utilizzato un’architettura MVC per la realizzazione di questo software
+2. Classi Java Servlet, per l’accettazione di richieste http;
+3. Classi Java Model per la gestione degli oggetti;
+4. File JSP per l’elaborazione delle informazioni ottenute dai controller
+5. HTML, CSS e JavaScript, per la gestione dell’interfaccia utente;
+6. Apache Tomcat (9 e 10), per il deployment della web application.
+7. DB relazionale MySQL per la memorizzazione dei dati degli utenti
+8. JSON per il passaggio di grandi quantità di dati tra server e client
 
 
-### _[www.dping.it/projects](https://www.dping.it/projects/)_
-### _[GITHUB REPOSITORY](https://github.com/dping-it/northenLight.git)_
+## FUNCTIONAL REQUIREMENTS
 
-### References
+Generali:
 
-For further reference, please consider the following sections:
+- Dovranno essere controllati e gestiti tutti i possibili errori;
+- Dovranno essere verificati tutti i dati (eventuali) inseriti dall’utente;
+- La pagina MACCHINETTA verrà aggiornata periodicamente;
+- Il Sistema è progettato per essere facilmente scalabile;
+- La Home Page dell’utente CUSTOMER è pensata principalmente per dispositivi
+    mobile.
 
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.5.3/maven-plugin/reference/html/)
-* [Create an OCI image](https://docs.spring.io/spring-boot/docs/2.5.3/maven-plugin/reference/html/#build-image)
-* [Spring Security](https://docs.spring.io/spring-boot/docs/2.5.3/reference/htmlsingle/#boot-features-security)
-* [Spring Boot DevTools](https://docs.spring.io/spring-boot/docs/2.5.3/reference/htmlsingle/#using-boot-devtools)
-* [Spring Data JPA](https://docs.spring.io/spring-boot/docs/2.5.3/reference/htmlsingle/#boot-features-jpa-and-spring-data)
-* [Rest Repositories](https://docs.spring.io/spring-boot/docs/2.5.3/reference/htmlsingle/#howto-use-exposing-spring-data-repositories-rest-endpoint)
-* [Spring Web](https://docs.spring.io/spring-boot/docs/2.5.3/reference/htmlsingle/#boot-features-developing-web-applications)
-* [Spring Data MongoDB](https://docs.spring.io/spring-boot/docs/2.5.3/reference/htmlsingle/#boot-features-mongodb)
-* [Validation](https://docs.spring.io/spring-boot/docs/2.5.3/reference/htmlsingle/#boot-features-validation)
-* [Java Mail Sender](https://docs.spring.io/spring-boot/docs/2.5.3/reference/htmlsingle/#boot-features-email)
+Lato CUSTOMER:
 
-### Guides
+- Il Sistema dovrà consentire la registrazione e l’accesso degli utenti (CUSTOMER);
+- Dopo il LOGIN:
+    o Il Sistema dovrà consentire la connessione ad una macchinetta da parte
+       dell’utente (CUSTOMER);
+    o Il Sistema dovrà impedire che un utente possa connettersi ad una macchinetta
+       già occupata da un altro utente.
+    o Il Sistema dovrà consentire la ricarica del conto da parte dell’utente
+    o Il Sistema mostrerà all’utente lo storico delle sue transazioni (almeno le più
+       recenti)
+    o Il Sistema dovrà consentire la disconnessione dell’utente dalla macchinetta
+    o Il Sistema mostrerà all’utente il credito residuo
 
-The following guides illustrate how to use some features concretely:
+Lato DISTRIBUTORE:
 
-* [Securing a Web Application](https://spring.io/guides/gs/securing-web/)
-* [Spring Boot and OAuth2](https://spring.io/guides/tutorials/spring-boot-oauth2/)
-* [Authenticating a User with LDAP](https://spring.io/guides/gs/authenticating-ldap/)
-* [Accessing Data with JPA](https://spring.io/guides/gs/accessing-data-jpa/)
-* [Accessing JPA Data with REST](https://spring.io/guides/gs/accessing-data-rest/)
-* [Accessing Neo4j Data with REST](https://spring.io/guides/gs/accessing-neo4j-data-rest/)
-* [Accessing MongoDB Data with REST](https://spring.io/guides/gs/accessing-mongodb-data-rest/)
-* [Accessing data with MySQL](https://spring.io/guides/gs/accessing-data-mysql/)
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/bookmarks/)
-* [Accessing Data with MongoDB](https://spring.io/guides/gs/accessing-data-mongodb/)
+- Il Sistema aggiornerà il contenuto della pagina ogni 2 secondi;
+- Il Sistema verifica se lo stato della macchinetta è cambiato;
+- Se lo stato è READY (nessun cliente collegato) il Sistema impedita l’interazione con la
+    macchinetta;
+- Se lo stato è diverso da READY (un utente è collegato):
+    o Il Sistema caricherà il credito dell’utente connesso mostrandolo nel display
+       della macchinetta;
+    o Il Sistema impedirà la connessione di un secondo utente;
+    o Il Sistema consentirà l’interazione dell’utente con la macchinetta;
+    o Il Sistema verificherà se il credito è sufficiente prima di completare l’acquisto
+       da parte dell’utente;
+    o Se il credito non è sufficiente il Sistema non consentirà l’acquisto
+    o Il Sistema aggiornerà il credito dopo ogni acquisto completato con successo;
+    o Il Sistema registrerà tutte le transazioni effettuate dall’utente
+    o Il Sistema consentirà la disconnessione dell’utente;
+    o Il Sistema aggiornerà il credito residuo dell’utente;
+    o IL Sistema riporta lo stato della macchinetta su READY;
+- La Sistema disconnetterà automaticamente l’utente dopo un minuto di inattività;
+- Se lo stato è SERVICE (tecnico collegato) il Sistema impedirà l’interazione con la
+    macchinetta e la connessione di utenti CUSTOMER;
+
+
+## DATA MODEL
+
+## MACHINE:
+
+- STATUS: rappresenta lo stato della macchinetta; questo sarà READY se la
+    macchinetta è disponibile altrimenti sarà uguale all’ID dell’utente collegato.
+    Con questo sistema posso contemporaneamente sapere se la macchinetta è libera o
+    occupata e in caso da chi è occupata.
+    Posso utilizzare questo campo anche per indicare stati della macchinetta come
+    Manutenzione o Non funzionante, utile per implementazioni future.
+- CREDIT: rappresenta il credito della macchinetta; quando un utente si collega il credito
+    dell’utente viene caricato nel credito della macchinetta.
+    Durante la disconnessione il credito dell’utente viene aggiornato con il credito residuo
+    della macchinetta.
+
+## TRANSACTION:
+
+- REF_SELECTION: rappresenta un riferimento all’id dello stock; con questa
+    informazione posso risalire al prodotto acquistato dall’utente.
+
+## STOCK:
+
+- SELECTION: rappresenta il codice da inserire nella macchinetta per acquistare quel
+    prodotto
+
+
+## NOTE
+
+La macchinetta e home utente sono due client separati indipendenti.
+
+Il server serve entrambi i client contemporaneamente.
+
+Per accedere alla macchinetta usare il seguente link:
+
+localhost: 8080/SmartVendingMachineProject_war_exploded/machine/distributore.jsp?idMachine=
+
+1234 è l’id della macchinetta, cambiandolo si potrà cambiare macchinetta.
+
+ESEMPI ID MACCHINETTE [1234, 2468]
+
+La schermata dell’utente (CUSTOMER, ADMIN, TECHNICAL) sono raggiungibili da :
+
+localhost:8080/SmartVendingMachineProject_war_exploded/
+
+Dopo il login il sistema indirizzerà l’utente della schermata adatta.
+
+Utenti preinseriti (per tutti gli utenti password: **password** )
+
+- CUSTOMER: mario.rossi@hotmail.it
+- ADMIN: luigi.verdi@smartvm.it
+- TECHNICAL: gianluca.bianchi@gmail.it
+
+PS: L’interfaccia del cliente è stata realizzata e ottimizzata per dispositivi mobili (smartphone)
+pertanto, per una migliore esperienza, consiglio di provare il software utilizzando il proprio
+smartphone connesso in rete locale o utilizzando un emulatore.
+
+PPS: Al momento non sono previste le funzionalità extra Tecnico e Admin anche se il software
+è predisposto per gestirle al meglio. Se ne avrò la possibilità in termini di tempo implementerò
+anche le interfacce TECHNICAL e ADMIN.
+
+
+
