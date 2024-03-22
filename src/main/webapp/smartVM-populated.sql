@@ -1,9 +1,9 @@
-drop schema if exists diprimio;
+drop schema if exists smartvm;
 
-create database IF NOT exists diprimio;
-use diprimio;
+create database IF NOT exists smartvm;
+use smartvm;
 
-CREATE TABLE diprimio.user (
+CREATE TABLE smartvm.user (
                                iduser INT NOT NULL auto_increment,
                                name VARCHAR(45) NULL,
                                phone VARCHAR(45) NOT NULL,
@@ -14,7 +14,7 @@ CREATE TABLE diprimio.user (
                                PRIMARY KEY (iduser));
 
 
-CREATE TABLE diprimio.machine (
+CREATE TABLE smartvm.machine (
                                   idmachine INT NOT NULL,
                                   type VARCHAR(45) NULL,
                                   status VARCHAR(45) NULL,
@@ -25,13 +25,13 @@ CREATE TABLE diprimio.machine (
 
 
 
-CREATE TABLE diprimio.product (
+CREATE TABLE smartvm.product (
                                   idproduct INT NOT NULL,
                                   description VARCHAR(255) NULL,
                                   price DOUBLE NULL,
                                   PRIMARY KEY (idproduct));
 
-CREATE TABLE diprimio.stock (
+CREATE TABLE smartvm.stock (
                                 idstock INT NOT NULL AUTO_INCREMENT,
                                 quantity INT NULL DEFAULT 0,
                                 selection VARCHAR(2) NOT NULL,
@@ -42,16 +42,16 @@ CREATE TABLE diprimio.stock (
                                 INDEX link_product_idx (ref_product ASC),
                                 CONSTRAINT link_machine
                                     FOREIGN KEY (ref_machine)
-                                        REFERENCES diprimio.machine (idmachine)
+                                        REFERENCES smartvm.machine (idmachine)
                                         ON DELETE NO ACTION
                                         ON UPDATE NO ACTION,
                                 CONSTRAINT link_product
                                     FOREIGN KEY (ref_product)
-                                        REFERENCES diprimio.product (idproduct)
+                                        REFERENCES smartvm.product (idproduct)
                                         ON DELETE NO ACTION
                                         ON UPDATE NO ACTION);
 
-CREATE TABLE diprimio.transaction (
+CREATE TABLE smartvm.transaction (
                                       idtransaction INT AUTO_INCREMENT,
                                       ref_selection INT NOT NULL,
                                       date_transaction DATE DEFAULT NULL,
@@ -70,7 +70,7 @@ CREATE TABLE diprimio.transaction (
                                       CONSTRAINT selection_user FOREIGN KEY (cod_user)
                                           REFERENCES user (iduser)/*,
     CONSTRAINT link_selection FOREIGN KEY (ref_selection)
-        REFERENCES diprimio.stock (idstock)*/
+        REFERENCES smartvm.stock (idstock)*/
 
                                           ON DELETE NO ACTION ON UPDATE NO ACTION
 );

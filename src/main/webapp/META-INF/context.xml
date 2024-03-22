@@ -10,10 +10,10 @@
 		name="jdbc/smartvm"
 		encrypt="true"
 		trustServerCertificate="false"
-		username="diprix"
-		password="Astrogame97#"
+		username="root"
+		password="Password2023@"
 		type="javax.sql.DataSource"
-		url="jdbc:mysql://5.249.155.102:3306/smartvm?useLegacyDatetimeCode=false&amp;serverTimezone=Europe/Rome"
+		url="jdbc:mysql://localhost:3310/smartvm?createDatabaseIfNotExist=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=Europe/Rome"
 		testOnBorrow="true"
 		validationQuery="SELECT 1" />		
 </Context>

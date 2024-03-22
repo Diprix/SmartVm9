@@ -13,7 +13,7 @@
 <input type="hidden" id="status" value="<%= request.getAttribute("status") %>">
 <input type="hidden" id="msg" value="<%= request.getAttribute("msg") %>">
 
-<div class="container" id="containerLoginForm">
+<div class="container" id="containerLoginForm" style="display: none">
 
     <div class="forms">
         <!-- Login Form -->
@@ -133,7 +133,7 @@
             <form action="${pageContext.request.contextPath}/login" method="post" id="signinFormDemo">
                 <div class="checkbox-text">
                     <div class="checkbox-content">
-                        <input type="checkbox" checked onclick="document.getElementById('containerLoginFormDemo').style.display = 'none'">
+                        <input type="checkbox" checked onclick="document.getElementById('containerLoginFormDemo').style.display = 'none'; document.getElementById('containerLoginForm').style.display = 'block'">
                         <label for="sigCheck" class="text">Show Demo</label>
                     </div>
 

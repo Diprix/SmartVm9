@@ -131,7 +131,7 @@
             const xhttp = new XMLHttpRequest();
             xhttp.onload = function() {
 
-                // Elaboro il JSOPN ricevuto dal server
+                // Elaboro il JSON ricevuto dal server
                 const json = this.responseText
                 const obj = JSON.parse(json);
 
