@@ -1,4 +1,4 @@
-TRY HERE: https://smartvm.oscardiprimio.it
+TRY HERE: [Live demo](https://smartvm9.oscardiprimio.it/smartwm.smartvm9/demo.html)
 
 ## SMART VENDING MACHINE
 
