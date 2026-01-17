@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: diprimio
+      MYSQL_USER: smartVM
+      MYSQL_PASSWORD: smartVM22
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./src/main/webapp/smartVM-populated.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+  app:
+    build: .
+    ports:
+      - "2345:8080"
+    depends_on:
+      - db

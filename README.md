@@ -189,5 +189,21 @@ PPS: Al momento non sono previste le funzionalità extra Tecnico e Admin anche s
 è predisposto per gestirle al meglio. Se ne avrò la possibilità in termini di tempo implementerò
 anche le interfacce TECHNICAL e ADMIN.
 
+## DOCKER
+
+Prerequisiti: Docker + Docker Compose.
+
+1. Avvio stack:
+```
+docker compose up --build
+```
+
+2. App:
+- Home: http://localhost:8080/smartwm.smartvm9/
+- Macchinetta: http://localhost:8080/smartwm.smartvm9/machine/distributore.jsp?idMachine=1234
+
+Note:
+- Il DB MySQL viene inizializzato con `src/main/webapp/smartVM-populated.sql`.
+- Credenziali DB: `smartVM` / `smartVM22` (configurate in `docker/tomcat-context.xml`).
 
 

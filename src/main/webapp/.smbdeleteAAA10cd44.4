@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartVM Demo</title>
+    <link rel="icon" href="assets/icons/favicon.ico">
+    <style>
+        :root {
+            --ink: #0f141a;
+            --paper: #f7f1ea;
+            --accent: #e46f2e;
+            --accent-2: #2b8a8f;
+            --frame: #16181c;
+            --frame-glow: rgba(22, 24, 28, 0.25);
+            --glass: rgba(255, 255, 255, 0.6);
+            --phone-zoom: 0.95;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            color: var(--ink);
+            font-family: "Baskerville", "Garamond", "Times New Roman", serif;
+            background:
+                radial-gradient(60vw 60vw at 10% 10%, #f2d7bd 0%, rgba(242, 215, 189, 0) 60%),
+                radial-gradient(50vw 50vw at 90% 20%, #cfe9e3 0%, rgba(207, 233, 227, 0) 55%),
+                linear-gradient(180deg, #f7f1ea 0%, #f2efe9 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 36px 20px 48px;
+            width: 100%;
+        }
+
+        .title {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 22px;
+            animation: fade-in 600ms ease-out both;
+        }
+
+        .title h1 {
+            margin: 0;
+            font-size: clamp(28px, 4vw, 44px);
+            letter-spacing: 0.5px;
+        }
+
+        .title .hint {
+            font-family: "Courier New", "Lucida Console", monospace;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #5b6770;
+        }
+
+        .creds {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            margin: 10px 0 18px;
+            font-family: "Courier New", "Lucida Console", monospace;
+            font-size: 12px;
+            color: #465059;
+        }
+
+        .creds .item {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px dashed rgba(0, 0, 0, 0.15);
+            border-radius: 12px;
+            padding: 10px 12px;
+        }
+
+        .creds .role {
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 11px;
+            color: #6d5b4d;
+            margin-bottom: 6px;
+        }
+
+        .creds .line {
+            display: block;
+            margin: 2px 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: minmax(260px, 1fr) minmax(320px, 1fr);
+            gap: 28px;
+            align-items: center;
+        }
+
+        .panel {
+            background: var(--glass);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 18px;
+            padding: 18px;
+            box-shadow: 0 20px 40px rgba(15, 20, 26, 0.12);
+            backdrop-filter: blur(6px);
+            animation: rise 700ms ease-out both;
+            position: relative;
+        }
+
+        .panel h2 {
+            margin: 0 0 12px 0;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-2);
+        }
+
+        .iphone {
+            position: relative;
+            margin: 0 auto;
+            height: 700px;
+            width: auto;
+            max-width: 420px;
+            aspect-ratio: 9 / 18;
+            border-radius: 40px;
+            background: var(--frame);
+            box-shadow: 0 28px 60px var(--frame-glow), inset 0 0 0 2px rgba(255, 255, 255, 0.06);
+            padding: 16px;
+        }
+
+        .iphone::before {
+            content: "";
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 22px;
+            border-radius: 0 0 16px 16px;
+            background: #0b0d10;
+        }
+
+        .iphone::after {
+            content: "";
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90px;
+            height: 3px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .screen {
+            width: 100%;
+            height: 100%;
+            border-radius: 28px;
+            overflow: hidden;
+            background: #0f1114;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .phone-zoom {
+            transform: scale(var(--phone-zoom));
+            transform-origin: top left;
+            width: calc(100% / var(--phone-zoom));
+            height: calc(100% / var(--phone-zoom));
+        }
+
+
+        .machine {
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            height: 680px;
+            background: #ffffff;
+        }
+
+        .panel.equal-height {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel.equal-height .stretch {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #6d5b4d;
+        }
+
+        .selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 8px 0 14px;
+            font-family: "Courier New", "Lucida Console", monospace;
+            font-size: 12px;
+            color: #4a545d;
+        }
+
+        .selector select {
+            appearance: none;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 8px 12px;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+        }
+
+        .selector .address {
+            font-size: 12px;
+            color: #6d5b4d;
+        }
+
+        .open-link {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            padding: 6px 10px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            background: rgba(255, 255, 255, 0.85);
+            font-family: "Courier New", "Lucida Console", monospace;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            color: #3f4a53;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        .open-link:hover {
+            border-color: rgba(0, 0, 0, 0.2);
+            background: #ffffff;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 0 3px rgba(228, 111, 46, 0.2);
+        }
+
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes rise {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 900px) {
+            .grid { grid-template-columns: 1fr; }
+            .machine { height: 60vh; }
+            .iphone { height: 60vh; }
+            .title { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="title">
+            <h1>SmartVM Demo</h1>
+            <div class="hint">Cliente + Macchinetta live</div>
+        </div>
+        <div class="creds">
+            <div class="item">
+                <div class="role">Customer</div>
+                <span class="line">Email: mario.rossi@hotmail.it</span>
+                <span class="line">Password: password</span>
+            </div>
+            <div class="item">
+                <div class="role">Technical</div>
+                <span class="line">Email: gianluca.bianchi@gmail.it</span>
+                <span class="line">Password: password</span>
+            </div>
+        </div>
+
+        <div class="grid">
+            <section class="panel equal-height" style="animation-delay: 80ms;">
+                <a class="open-link" href="/smartwm.smartvm9/" target="_blank" rel="noopener">Apri ↗</a>
+                <div class="badge"><span class="dot"></span>Cliente mobile</div>
+                <div class="stretch">
+                    <div class="iphone">
+                        <div class="screen">
+                            <iframe class="iframe phone-zoom" title="Home cliente" src="/smartwm.smartvm9/">
+                            Il browser non supporta gli iframe.
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel equal-height" style="animation-delay: 160ms;">
+                <a class="open-link" id="machineOpen" href="/smartwm.smartvm9/machine/distributore.jsp?idMachine=1234" target="_blank" rel="noopener">Apri ↗</a>
+                <div class="badge"><span class="dot"></span>Macchinetta</div>
+                <div class="selector">
+                    <label for="machineSelect">ID</label>
+                    <select id="machineSelect" aria-label="Seleziona macchinetta">
+                        <option value="1234" data-address="Viale delle Scienze, Edificio 6, Palermo">1234 · snack · ready</option>
+                        <!-- <option value="5678" data-address="Viale delle Scienze, Edificio 18, Palermo">5678 · drink · off</option>
+                        <option value="0" data-address="Virtuale">0 · virtual · off</option>-->
+                        <option value="2468" data-address="Viale delle Scienze, Edificio 2, Palermo">2468 · snack · ready</option>
+                    </select>
+                    <span class="address" id="machineAddress">Viale delle Scienze, Edificio 6, Palermo</span>
+                </div>
+                <div class="stretch">
+                    <div class="machine">
+                            <iframe class="iframe" title="Interfaccia macchinetta" src="/smartwm.smartvm9/machine/distributore.jsp?idMachine=1234" scrolling="no" id="machineFrame">
+                                Il browser non supporta gli iframe.
+                            </iframe>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+<script>
+    (function () {
+        var select = document.getElementById('machineSelect');
+        var frame = document.getElementById('machineFrame');
+        var address = document.getElementById('machineAddress');
+        if (!select || !frame) return;
+
+        function updateMachine() {
+            var id = select.value;
+            frame.src = '/smartwm.smartvm9/machine/distributore.jsp?idMachine=' + encodeURIComponent(id);
+            var open = document.getElementById('machineOpen');
+            if (open) {
+                open.href = '/smartwm.smartvm9/machine/distributore.jsp?idMachine=' + encodeURIComponent(id);
+            }
+            var option = select.options[select.selectedIndex];
+            var addr = option ? option.getAttribute('data-address') : '';
+            if (address) address.textContent = addr || '';
+        }
+
+        select.addEventListener('change', updateMachine);
+        updateMachine();
+    })();
+</script>
+</html>

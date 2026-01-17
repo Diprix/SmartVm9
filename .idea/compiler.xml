@@ -9,8 +9,5 @@
         <module name="SmartVm9" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="SmartVm9" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>
